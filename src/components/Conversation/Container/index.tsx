@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
+import EmptyPlaceholder from './EmptyPlaceholder';
 import { StyledContainer } from './styles';
 
+import DataContext from 'views/Home/dataContext';
+import ActiveConversation from './ActiveConversation';
+
 const ConversationContainer: React.FC = () => {
+  const { selectedConversation } = useContext(DataContext);
+
   return (
     <StyledContainer>
-      Placeholder
+      {!selectedConversation && <EmptyPlaceholder/>}
+      {selectedConversation && <ActiveConversation conversation={selectedConversation}/>}
     </StyledContainer>
   );
 }

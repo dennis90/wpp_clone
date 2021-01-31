@@ -5,9 +5,13 @@ import { createContext } from 'react';
 
 import { Conversation, MessageTypes, User } from 'types/Conversation';
 
+export type SelectConversationHandler = (conversation?: Conversation) => void;
+
 export interface ProviderData {
   conversations: Conversation[];
+  selectedConversation?: Conversation;
   user: User;
+  selectConversation: SelectConversationHandler;
 }
 
 const userJohnDoe: User = {
@@ -30,6 +34,7 @@ const userKYC: User = {
 
 export const initialData: ProviderData = {
   user: userJohnDoe,
+  selectConversation: () => ({}),
   conversations: [
     {
       id: '100',

@@ -4,25 +4,34 @@ import Typography from '@material-ui/core/Typography';
 import format from 'date-fns/format';
 import formatRelative from 'date-fns/formatRelative';
 import isToday from 'date-fns/isToday';
-import React from 'react';
+import React, { useContext } from 'react';
 
 import { Conversation } from 'types/Conversation';
 import { StyledBadge, StyledContainer, StyledDateText, StyledInfoContainer, StyledLastMessage, StyledRow, StyledTitle } from './styles';
 
-export type ConversationProps = Conversation;
+import DataContext from 'views/Home/dataContext';
+
+export interface ConversationProps {
+  conversation: Conversation;
+  active?: boolean;
+};
 
 const ConversationItem: React.FC<ConversationProps> = (props) => {
-  const unreadCount = props.messages.filter((message) => !message.read).length;
-  const lastMessage = props.messages[0];
+  const { selectConversation } = useContext(DataContext);
+  const unreadCount = props.conversation.messages.filter((message) => !message.read).length;
+  const lastMessage = props.conversation.messages[0];
 
   return (
-    <StyledContainer>
-      <Avatar alt={props.title} src={props.image}/>
+    <StyledContainer
+      active={props.active}
+      onClick={() => selectConversation(props.conversation)}
+    >
+      <Avatar alt={props.conversation.title} src={props.conversation.image}/>
 
       <StyledInfoContainer>
         <StyledRow>
           <StyledTitle>
-            {props.title}
+            {props.conversation.title}
           </StyledTitle>
 
           <StyledDateText>

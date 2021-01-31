@@ -1,8 +1,19 @@
+import React from 'react';
+
 import { Theme } from '@material-ui/core/styles';
 import styled from 'styled-components';
 
-export const StyledContainer = styled.div`
-  background-color: ${({ theme }: { theme: Theme }) => theme.palette.background.paper};
+export interface StyledContainerProps extends React.HTMLAttributes<HTMLDivElement> {
+  active?: boolean;
+}
+
+export const StyledContainer = styled.div<StyledContainerProps>`
+  background-color: ${
+    ({ active, theme }: { theme: Theme } & StyledContainerProps) =>
+      active
+        ? theme.palette.grey[200]
+        : theme.palette.background.paper
+  };
   border-color: ${({ theme }: { theme: Theme }) => theme.palette.grey[200]};
   border-style: solid;
   border-width: 1px 0;

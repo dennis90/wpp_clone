@@ -8,14 +8,18 @@ import { StyledContainer } from './styles';
 import DataContext from 'views/Home/dataContext';
 
 const ConversationList: React.FC = () => {
-  const { conversations } = useContext(DataContext);
+  const { conversations, selectedConversation } = useContext(DataContext);
 
   return (
     <StyledContainer>
       <Header/>
 
-      {conversations.map(
-        (conversation) => <ConversationItem key={conversation.id} {...conversation}/>,
+      {conversations.map((conversation) =>
+        <ConversationItem
+          key={conversation.id}
+          active={conversation.id === selectedConversation?.id}
+          conversation={conversation}
+        />,
       )}
     </StyledContainer>
   );
