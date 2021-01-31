@@ -1,12 +1,15 @@
+import { createMuiTheme } from '@material-ui/core/styles';
 import Head from 'next/head';
 import React from 'react';
-
-import 'styles/styles.global.css';
+import { ThemeProvider } from 'styled-components';
+import { GlobalStyle } from 'styles/global';
 
 export interface MyAppProps {
   Component: React.ComponentClass;
   pageProps: unknown;
 }
+
+const theme = createMuiTheme();
 
 const MyApp: React.FC<MyAppProps> = ({ Component, pageProps }) => (
   <>
@@ -15,7 +18,11 @@ const MyApp: React.FC<MyAppProps> = ({ Component, pageProps }) => (
       <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
     </Head>
 
-    <Component {...pageProps} />
+    <ThemeProvider theme={theme}>
+      <GlobalStyle/>
+      <Component {...pageProps} />
+    </ThemeProvider>
+
   </>
 );
 
