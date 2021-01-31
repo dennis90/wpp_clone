@@ -1,11 +1,11 @@
 import React from 'react';
 
 import { ConversationDescription } from 'types/Conversation';
-import Conversation from './Conversation';
+import ConversationItem from './Item';
 import { StyledContainer } from './styles';
 
 // TODO: This information should come from API Endpoint
-const conversationsList: ConversationDescription[] = [
+const conversations: ConversationDescription[] = [
   {
     description: 'Detran - SP - Autenticidade R$ 0, 20',
     id: '100',
@@ -24,14 +24,14 @@ const conversationsList: ConversationDescription[] = [
   },
 ]
 
-const ConversationsListing: React.FC = () => {
+const ConversationList: React.FC = () => {
   return (
     <StyledContainer>
-      {conversationsList.map(
-        (conversation) => <Conversation key={conversation.id} {...conversation}/>)
+      {conversations.map(
+        (conversation) => <ConversationItem key={conversation.id} {...conversation}/>)
       }
     </StyledContainer>
   );
 };
 
-export default ConversationsListing;
+export default ConversationList;

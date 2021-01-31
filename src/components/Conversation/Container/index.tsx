@@ -2,7 +2,7 @@ import React from 'react';
 
 import { StyledContainer } from './styles';
 
-const ConversationListing: React.FC = () => {
+const ConversationContainer: React.FC = () => {
   return (
     <StyledContainer>
       Placeholder
@@ -10,4 +10,4 @@ const ConversationListing: React.FC = () => {
   );
 }
 
-export default ConversationListing;
+export default ConversationContainer;

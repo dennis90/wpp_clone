@@ -1,13 +1,13 @@
 import React from 'react';
 
-import ConversationBody from 'components/ConversationBody';
-import ConversationsListing from 'components/ConversationsListing';
+import ConversationContainer from 'components/Conversation/Container';
+import ConversationList from 'components/Conversation/List';
 import { StyledContainer } from './styles';
 
 const Home: React.FC = () => (
   <StyledContainer>
-    <ConversationsListing/>
-    <ConversationBody/>
+    <ConversationList/>
+    <ConversationContainer/>
   </StyledContainer>
 );
 

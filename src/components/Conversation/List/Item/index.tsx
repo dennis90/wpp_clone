@@ -12,7 +12,7 @@ import { StyledContainer, StyledInfoContainer, StyledLastMessage, StyledRow } fr
 
 export type ConversationProps = ConversationDescription;
 
-const Conversation: React.FC<ConversationProps> = (props) => (
+const ConversationItem: React.FC<ConversationProps> = (props) => (
   <StyledContainer>
     <Avatar alt={props.title} src={props.image}/>
 
@@ -42,4 +42,4 @@ const Conversation: React.FC<ConversationProps> = (props) => (
   </StyledContainer>
 );
 
-export default Conversation;
+export default ConversationItem;
