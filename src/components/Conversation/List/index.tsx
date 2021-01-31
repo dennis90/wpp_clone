@@ -1,35 +1,22 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
-import { ConversationDescription } from 'types/Conversation';
+import Header from './Header';
 import ConversationItem from './Item';
 import { StyledContainer } from './styles';
 
 // TODO: This information should come from API Endpoint
-const conversations: ConversationDescription[] = [
-  {
-    description: 'Detran - SP - Autenticidade R$ 0, 20',
-    id: '100',
-    image: 'unknown',
-    lastActive: new Date('2021-01-30T23:00:00.000Z'),
-    title: 'Sala de chat 1',
-    unreadMessagesCount: 1,
-  },
-  {
-    description: 'Olá\n\nMeu nome é Karen, eu sou o robô assistente de cadastro da Intersowa OTC',
-    id: '200',
-    image: 'unknown',
-    lastActive: new Date('2021-01-29T22:00:00.000Z'),
-    title: 'Sala de chat 2',
-    unreadMessagesCount: 1,
-  },
-]
+import DataContext from 'views/Home/dataContext';
 
 const ConversationList: React.FC = () => {
+  const { conversations } = useContext(DataContext);
+
   return (
     <StyledContainer>
+      <Header/>
+
       {conversations.map(
-        (conversation) => <ConversationItem key={conversation.id} {...conversation}/>)
-      }
+        (conversation) => <ConversationItem key={conversation.id} {...conversation}/>,
+      )}
     </StyledContainer>
   );
 };

@@ -1,45 +1,50 @@
 import Avatar from '@material-ui/core/Avatar';
 import Badge from '@material-ui/core/Badge';
-import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import format from 'date-fns/format';
 import formatRelative from 'date-fns/formatRelative';
 import isToday from 'date-fns/isToday';
 import React from 'react';
 
-import { ConversationDescription } from 'types/Conversation';
-import { StyledContainer, StyledInfoContainer, StyledLastMessage, StyledRow } from './styles';
+import { Conversation } from 'types/Conversation';
+import { StyledBadge, StyledContainer, StyledDateText, StyledInfoContainer, StyledLastMessage, StyledRow, StyledTitle } from './styles';
 
-export type ConversationProps = ConversationDescription;
+export type ConversationProps = Conversation;
 
-const ConversationItem: React.FC<ConversationProps> = (props) => (
-  <StyledContainer>
-    <Avatar alt={props.title} src={props.image}/>
+const ConversationItem: React.FC<ConversationProps> = (props) => {
+  const unreadCount = props.messages.filter((message) => !message.read).length;
+  const lastMessage = props.messages[0];
 
-    <StyledInfoContainer>
-      <StyledRow>
-        <Typography variant="h6" component="span">
-          {props.title}
-        </Typography>
+  return (
+    <StyledContainer>
+      <Avatar alt={props.title} src={props.image}/>
 
-        {isToday(props.lastActive)
-          ? format(props.lastActive, 'p')
-          : formatRelative(props.lastActive, new Date())
-        }
-      </StyledRow>
+      <StyledInfoContainer>
+        <StyledRow>
+          <StyledTitle>
+            {props.title}
+          </StyledTitle>
 
-      <StyledRow>
-        <StyledLastMessage>
-          {props.description}
-        </StyledLastMessage>
+          <StyledDateText>
+            {format(lastMessage.when, isToday(lastMessage.when) ? 'p' : 'P')}
+          </StyledDateText>
+        </StyledRow>
 
-        <Badge
-          badgeContent={props.unreadMessagesCount}
-          color="primary"
-        />
-      </StyledRow>
-    </StyledInfoContainer>
-  </StyledContainer>
-);
+        <StyledRow>
+          <StyledLastMessage>
+            {lastMessage.text}
+          </StyledLastMessage>
+
+          {unreadCount > 0 &&
+            <StyledBadge>
+              {unreadCount}
+            </StyledBadge>
+          }
+
+        </StyledRow>
+      </StyledInfoContainer>
+    </StyledContainer>
+  );
+};
 
 export default ConversationItem;
