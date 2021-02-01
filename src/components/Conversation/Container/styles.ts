@@ -3,5 +3,5 @@ import styled from 'styled-components';
 
 export const StyledContainer = styled.div`
   flex: 9;
-  background-color: ${({ theme }: { theme: Theme }) => theme.palette.background.paper};
+  background-color: ${({ theme }: { theme: Theme }) => theme.palette.background.default};
 `;

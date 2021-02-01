@@ -3,7 +3,7 @@
 
 import { createContext } from 'react';
 
-import { Conversation, MessageTypes, User } from 'types/Conversation';
+import { Conversation, MessageTypes, User, messageTypeAvailableActions } from 'types/Conversation';
 
 export type SelectConversationHandler = (conversation?: Conversation) => void;
 
@@ -43,11 +43,18 @@ export const initialData: ProviderData = {
       messages: [
         {
           userId: userKYC.id,
-          actions: [],
+          actions: messageTypeAvailableActions[MessageTypes.ValidateDocuments],
+          type: MessageTypes.ValidateDocuments,
+          read: false,
+          when: new Date('2021-01-31T12:35:00.000Z'),
+        },
+        {
+          userId: userKaren.id,
+          actions: messageTypeAvailableActions[MessageTypes.GreetingFromBuyer],
           type: MessageTypes.Text,
           when: new Date('2021-01-31T12:30:00.000Z'),
-          text: 'Hello world',
-          read: false,
+          text: 'Houve um novo cadastro de Pessoa Física\n\nDados do formulário:\nNome:\t\t| José da Silva\nData de nascimento:\t\t| 22/02/1922\nCPF:\t\t | 022.332.556-65\nEndereço:\t\tRua das flores, 1022 - São Paulo, SP',
+          read: true,
         },
       ],
       type: 'seller',
@@ -60,10 +67,10 @@ export const initialData: ProviderData = {
       messages: [
         {
           userId: userKaren.id,
-          actions: [],
-          type: MessageTypes.Text,
+          actions: messageTypeAvailableActions[MessageTypes.GreetingFromSeller],
+          type: MessageTypes.GreetingFromSeller,
           when: new Date('2021-01-30T10:30:00.000Z'),
-          text: 'Hello world 2',
+          text: 'Olá\n\nMeu nome é Karen, eu sou o robô assitente de cadastro do Intersowa OTC.\n\nVamos dar início ao seu processo de cadastramento?',
           read: false,
         },
       ],

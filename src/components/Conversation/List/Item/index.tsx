@@ -1,8 +1,5 @@
 import Avatar from '@material-ui/core/Avatar';
-import Badge from '@material-ui/core/Badge';
-import Typography from '@material-ui/core/Typography';
 import format from 'date-fns/format';
-import formatRelative from 'date-fns/formatRelative';
 import isToday from 'date-fns/isToday';
 import React, { useContext } from 'react';
 
@@ -41,7 +38,7 @@ const ConversationItem: React.FC<ConversationProps> = (props) => {
 
         <StyledRow>
           <StyledLastMessage>
-            {lastMessage.text}
+            {lastMessage.text ? lastMessage.text : lastMessage.actions.join(', ')}
           </StyledLastMessage>
 
           {unreadCount > 0 &&
