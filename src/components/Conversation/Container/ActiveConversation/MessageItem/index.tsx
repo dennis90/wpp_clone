@@ -18,15 +18,17 @@ export interface MessageItemProps {
 const MessageItem: React.FC<MessageItemProps> = ({ message, users }) => {
   const { user: appUser } = useContext(DataContext);
 
-  const messageFrom = users.find((user) => user.id === message.userId)!;
-  const sent = messageFrom.id === appUser.id;
+  const messageFrom = users.find((user) => user.id === message.userId);
+  const sent = messageFrom?.id === appUser.id;
 
   return (
     <StyledMessageContent kind={sent ? 'sent' : 'received'}>
-      <StyledAvatarContainer>
-        <Avatar src={messageFrom.profilePicture} alt={messageFrom.name}/>
-        {messageFrom.name}
-      </StyledAvatarContainer>
+      {messageFrom &&
+        <StyledAvatarContainer>
+          <Avatar src={messageFrom.profilePicture} alt={messageFrom.name}/>
+          {messageFrom.name}
+        </StyledAvatarContainer>
+      }
 
       <div>
         {message.text &&

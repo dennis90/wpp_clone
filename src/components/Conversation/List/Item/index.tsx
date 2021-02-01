@@ -11,7 +11,7 @@ import DataContext from 'views/Home/dataContext';
 export interface ConversationProps {
   conversation: Conversation;
   active?: boolean;
-};
+}
 
 const ConversationItem: React.FC<ConversationProps> = (props) => {
   const { selectConversation } = useContext(DataContext);

@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 
 import ConversationContainer from 'components/Conversation/Container';
 import ConversationList from 'components/Conversation/List';
