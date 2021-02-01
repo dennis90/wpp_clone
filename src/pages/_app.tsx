@@ -6,7 +6,7 @@ import { GlobalStyle } from 'styles/global';
 
 export interface MyAppProps {
   Component: React.ComponentClass;
-  pageProps: unknown;
+  pageProps: any;
 }
 
 const theme = createMuiTheme();

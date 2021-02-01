@@ -18,7 +18,7 @@ export interface MessageItemProps {
 const MessageItem: React.FC<MessageItemProps> = ({ message, users }) => {
   const { user: appUser } = useContext(DataContext);
 
-  const messageFrom = users.find((user) => user.id === message.userId);
+  const messageFrom = users.find((user) => user.id === message.userId)!;
   const sent = messageFrom.id === appUser.id;
 
   return (

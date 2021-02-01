@@ -25,12 +25,16 @@ export enum MessageTypes {
   ValidateDocuments = 'validate_documents',
 }
 
-export const messageTypeAvailableActions: Partial<Record<MessageTypes, ActionTypes[]>> = {
+export const messageTypeAvailableActions: Record<MessageTypes, ActionTypes[]> = {
   [MessageTypes.GreetingFromBuyer]: [ActionTypes.Approve, ActionTypes.Reject, ActionTypes.BuyerInfo],
   [MessageTypes.GreetingFromSeller]: [ActionTypes.Register, ActionTypes.SellerInfo],
   [MessageTypes.ValidateDocuments]: [
     ActionTypes.ValidateDriversLicense, ActionTypes.ValidateCredit, ActionTypes.ValidateCriminalRecord
   ],
+  [MessageTypes.MediaAudio]: [],
+  [MessageTypes.MediaImage]: [],
+  [MessageTypes.MediaUnknown]: [],
+  [MessageTypes.Text]: [],
 };
 
 export interface Message {
