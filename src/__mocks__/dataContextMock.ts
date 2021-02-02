@@ -1,18 +1,5 @@
-// Attention, the intent of this file is to mock the app request data
-// this should be replaced with the data from an external API.
-
-import { createContext } from 'react';
-
-import { Conversation, MessageTypes, User, messageTypeAvailableActions } from 'types/Conversation';
-
-export type SelectConversationHandler = (conversation?: Conversation) => void;
-
-export interface ProviderData {
-  conversations: Conversation[];
-  selectedConversation?: Conversation;
-  user: User;
-  selectConversation: SelectConversationHandler;
-}
+import { ProviderValue } from 'data/dataContext';
+import { MessageTypes, User, messageTypeAvailableActions } from 'types/Conversation';
 
 const userJohnDoe: User = {
   id: '100',
@@ -32,7 +19,7 @@ const userKYC: User = {
   profilePicture: 'media/butterfly.jpg',
 };
 
-export const initialData: ProviderData = {
+export const initialData: ProviderValue = {
   user: userJohnDoe,
   selectConversation: () => ({}),
   conversations: [
@@ -79,5 +66,3 @@ export const initialData: ProviderData = {
     }
   ],
 };
-
-export default createContext<ProviderData>(initialData);

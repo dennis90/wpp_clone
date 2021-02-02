@@ -7,7 +7,7 @@ import React, { useContext } from 'react';
 
 import { Message, User } from 'types/Conversation';
 
-import DataContext from 'views/Home/dataContext';
+import DataContext from 'data/dataContext';
 import { StyledMessageContent, StyledAvatarContainer, StyledReceivedMessage, StyledDate, StyledActionsContainer } from './styles';
 
 export interface MessageItemProps {

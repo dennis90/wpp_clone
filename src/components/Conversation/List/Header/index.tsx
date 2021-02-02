@@ -3,16 +3,16 @@ import React, { useContext } from 'react';
 
 import { StyledUserHeader, StyledUserName } from './styles';
 
-import DataContext from 'views/Home/dataContext';
+import DataContext from 'data/dataContext';
 
 const ListHeader: React.FC = () => {
   const { user } = useContext(DataContext);
 
   return (
     <StyledUserHeader>
-      <Avatar src={user.profilePicture} alt={user.name}/>
+      <Avatar src={user?.profilePicture} alt={user?.name}/>
       <StyledUserName>
-        {user.name}
+        {user?.name}
       </StyledUserName>
     </StyledUserHeader>
   );

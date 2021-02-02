@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Theme } from '@material-ui/core/styles';
+import Badge from '@material-ui/core/Badge'
 import styled from 'styled-components';
 
 export interface StyledContainerProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -51,15 +52,10 @@ export const StyledDateText = styled.span`
   margin: auto 0;
 `;
 
-export const StyledBadge = styled.span`
-  background-color: ${({ theme }: { theme: Theme }) => theme.palette.primary.dark};
-  border-radius: 50%;
-  box-sizing: border-box;
-  color: ${({ theme }: { theme: Theme }) => theme.palette.primary.contrastText};
-  font-size: 1rem;
-  height: 20px;
-  padding: 5px 7.5px;
-  width: 20px;
+export const StyledBadge = styled(Badge)`
+  span {
+    transform: none;
+  }
 `;
 
 export const StyledTitle = styled.span`

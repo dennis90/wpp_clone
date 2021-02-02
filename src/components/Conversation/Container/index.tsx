@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import EmptyPlaceholder from './EmptyPlaceholder';
 import { StyledContainer } from './styles';
 
-import DataContext from 'views/Home/dataContext';
+import DataContext from 'data/dataContext';
 import ActiveConversation from './ActiveConversation';
 
 const ConversationContainer: React.FC = () => {

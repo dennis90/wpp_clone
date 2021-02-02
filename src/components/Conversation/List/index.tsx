@@ -5,7 +5,7 @@ import ConversationItem from './Item';
 import { StyledContainer } from './styles';
 
 // TODO: This information should come from API Endpoint
-import DataContext from 'views/Home/dataContext';
+import DataContext from 'data/dataContext';
 
 const ConversationList: React.FC = () => {
   const { conversations, selectedConversation } = useContext(DataContext);

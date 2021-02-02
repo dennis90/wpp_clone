@@ -6,7 +6,7 @@ import React, { useContext } from 'react';
 import { Conversation } from 'types/Conversation';
 import { StyledBadge, StyledContainer, StyledDateText, StyledInfoContainer, StyledLastMessage, StyledRow, StyledTitle } from './styles';
 
-import DataContext from 'views/Home/dataContext';
+import DataContext from 'data/dataContext';
 
 export interface ConversationProps {
   conversation: Conversation;
@@ -21,7 +21,7 @@ const ConversationItem: React.FC<ConversationProps> = (props) => {
   return (
     <StyledContainer
       active={props.active}
-      onClick={() => selectConversation(props.conversation)}
+      onClick={() => selectConversation(props.conversation.id)}
     >
       <Avatar alt={props.conversation.title} src={props.conversation.image}/>
 
@@ -41,12 +41,7 @@ const ConversationItem: React.FC<ConversationProps> = (props) => {
             {lastMessage.text ? lastMessage.text : lastMessage.actions.join(', ')}
           </StyledLastMessage>
 
-          {unreadCount > 0 &&
-            <StyledBadge>
-              {unreadCount}
-            </StyledBadge>
-          }
-
+          <StyledBadge badgeContent={unreadCount} color="primary"/>
         </StyledRow>
       </StyledInfoContainer>
     </StyledContainer>
