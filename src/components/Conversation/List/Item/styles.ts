@@ -1,7 +1,6 @@
-import React from 'react';
-
-import { Theme } from '@material-ui/core/styles';
 import Badge from '@material-ui/core/Badge'
+import { Theme } from '@material-ui/core/styles';
+import React from 'react';
 import styled from 'styled-components';
 
 export interface StyledContainerProps extends React.HTMLAttributes<HTMLDivElement> {

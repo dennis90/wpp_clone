@@ -1,10 +1,11 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import format from 'date-fns/format';
 
-import { initialData } from '__mocks__/dataContextMock';
 import AppProviders from '__mocks__/appProviders';
+import { initialData } from '__mocks__/dataContextMock';
 import DataContext from 'data/dataContext';
 import { Conversation, Message, MessageTypes } from 'types/Conversation';
+
 import Item from './index';
 
 const message: Message = {
@@ -87,7 +88,7 @@ describe('Conversation listing Item component', () => {
     const image = screen.getByAltText(localConversation.title) as HTMLImageElement;
 
     expect(image).toBeInTheDocument();
-    expect(image.src).toEqual(`http://localhost/${localConversation.image}`)
+    expect(image.src).toContain(localConversation.image);
   });
 
   it('display unread messages count', () => {

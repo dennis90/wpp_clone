@@ -32,6 +32,9 @@ module.exports = {
         // We will use TypeScript's types for component props instead
         'react/prop-types': 'off',
 
+        // We will use TypeScript's function definition for component display name
+        'react/display-name': 'off',
+
         // No need to import React when using Next.js
         'react/react-in-jsx-scope': 'off',
 

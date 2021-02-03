@@ -2,7 +2,7 @@ import Avatar from '@material-ui/core/Avatar';
 import React from 'react';
 
 import { Conversation } from 'types/Conversation';
-import { StyledHeaderContainer, StyledConversationDetails, StyledParticipants, StyledTitle } from './styles';
+import { StyledConversationDetails, StyledHeaderContainer, StyledParticipants, StyledTitle } from './styles';
 
 export interface HeaderProps {
   image: Conversation['image'];
@@ -14,6 +14,7 @@ const Header: React.FC<HeaderProps> = (props) => {
   return (
     <StyledHeaderContainer>
       <Avatar src={props.image} alt={props.title}/>
+
       <StyledConversationDetails>
         <StyledTitle>
           {props.title}

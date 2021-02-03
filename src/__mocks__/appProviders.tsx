@@ -1,5 +1,5 @@
-import { ThemeProvider } from 'styled-components';
 import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from 'styled-components';
 
 const theme = createMuiTheme();
 

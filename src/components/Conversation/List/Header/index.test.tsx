@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 
-import { initialData } from '__mocks__/dataContextMock';
 import AppProviders from '__mocks__/appProviders';
+import { initialData } from '__mocks__/dataContextMock';
 import DataContext from 'data/dataContext';
 import { User } from 'types/Conversation';
 import Header from './index';
@@ -25,7 +25,7 @@ describe('Conversation listing Header component', () => {
     const image = screen.getByAltText(mockedUser.name) as HTMLImageElement;
 
     expect(image).toBeInTheDocument();
-    expect(image.src).toEqual(`http://localhost/${mockedUser.profilePicture}`)
+    expect(image.src).toContain(mockedUser.profilePicture);
 
   });
 

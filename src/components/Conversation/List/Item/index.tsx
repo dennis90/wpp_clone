@@ -3,10 +3,9 @@ import format from 'date-fns/format';
 import isToday from 'date-fns/isToday';
 import React, { useContext } from 'react';
 
+import DataContext from 'data/dataContext';
 import { Conversation } from 'types/Conversation';
 import { StyledBadge, StyledContainer, StyledDateText, StyledInfoContainer, StyledLastMessage, StyledRow, StyledTitle } from './styles';
-
-import DataContext from 'data/dataContext';
 
 export interface ConversationProps {
   conversation: Conversation;

@@ -1,5 +1,5 @@
 import { ProviderValue } from 'data/dataContext';
-import { MessageTypes, User, messageTypeAvailableActions } from 'types/Conversation';
+import { messageTypeAvailableActions,MessageTypes, User } from 'types/Conversation';
 
 const userJohnDoe: User = {
   id: '100',

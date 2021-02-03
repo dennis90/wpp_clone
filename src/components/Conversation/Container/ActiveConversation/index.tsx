@@ -18,7 +18,13 @@ const ActiveConversation: React.FC<ActiveConversationProps> = (props) => (
     />
 
     <StyledMessagesContainer>
-      {props.conversation.messages.map((message, index) => <MessageItem message={message} key={index} users={props.conversation.users}/>)}
+      {props.conversation.messages.map((message, index) =>
+        <MessageItem
+          conversationUsers={props.conversation.users}
+          key={index}
+          message={message}
+        />,
+      )}
     </StyledMessagesContainer>
   </div>
 );

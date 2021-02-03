@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import ConversationContainer from 'components/Conversation/Container';
 import ConversationList from 'components/Conversation/List';
-import DataContext, { SelectConversationHandler, ProviderValue } from 'data/dataContext';
+import DataContext, { ProviderValue, SelectConversationHandler } from 'data/dataContext';
 import { StyledContainer } from './styles';
 
 // This should be replaced by actual data

@@ -1,9 +1,8 @@
 import Avatar from '@material-ui/core/Avatar';
 import React, { useContext } from 'react';
 
-import { StyledUserHeader, StyledUserName } from './styles';
-
 import DataContext from 'data/dataContext';
+import { StyledUserHeader, StyledUserName } from './styles';
 
 const ListHeader: React.FC = () => {
   const { user } = useContext(DataContext);
