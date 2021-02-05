@@ -44,7 +44,7 @@ export interface Message {
   text?: string;
   type: MessageTypes;
   userId: string;
-  when: Date;
+  when: string;
 }
 
 export interface Conversation {

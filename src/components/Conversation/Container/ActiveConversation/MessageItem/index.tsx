@@ -21,6 +21,8 @@ const MessageItem: React.FC<MessageItemProps> = ({ message, conversationUsers: u
   const messageFrom = users.find((user) => user.id === message.userId);
   const sent = messageFrom?.id === appUser?.id;
 
+  const messageDate = new Date(message.when);
+
   return (
     <StyledMessageContent kind={sent ? 'sent' : 'received'}>
       {messageFrom && !sent &&
@@ -36,7 +38,7 @@ const MessageItem: React.FC<MessageItemProps> = ({ message, conversationUsers: u
             <p dangerouslySetInnerHTML={{ __html: marked(message.text) }}/>
 
             <StyledDate>
-              {isToday(message.when) ? format(message.when, 'p') : format(message.when, 'Pp')}
+              {isToday(messageDate) ? format(messageDate, 'p') : format(messageDate, 'Pp')}
             </StyledDate>
           </StyledReceivedMessage>
         }

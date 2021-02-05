@@ -2,16 +2,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { User } from 'types/Conversation';
 
-// TODO: This should be replaced by real data
-import { users } from '__mocks__/data';
-
 export interface SessionSlice {
   user?: User;
 }
 
-// TODO: This should be replaced by real data
 const initialState: SessionSlice = {
-  user: users.johnDoe,
+  user: undefined,
 };
 
 export const sessionSlice = createSlice({
@@ -27,5 +23,7 @@ export const sessionSlice = createSlice({
     },
   },
 });
+
+export const actions = sessionSlice.actions;
 
 export default sessionSlice.reducer;

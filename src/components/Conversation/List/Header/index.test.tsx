@@ -1,8 +1,5 @@
-import { render, screen } from '@testing-library/react';
-
 import AppProviders from '__mocks__/appProviders';
-import { initialData } from '__mocks__/data';
-import DataContext from 'data/dataContext';
+import { render, screen } from 'test-utils';
 import { User } from 'types/Conversation';
 import Header from './index';
 
@@ -16,10 +13,9 @@ describe('Conversation listing Header component', () => {
   it('display Avatar image', () => {
     render(
       <AppProviders>
-        <DataContext.Provider value={{ ...initialData, user: mockedUser }}>
-          <Header/>
-        </DataContext.Provider>
-      </AppProviders>
+        <Header/>
+      </AppProviders>,
+      { initialState: { session: { user: mockedUser } } },
     );
 
     const image = screen.getByAltText(mockedUser.name) as HTMLImageElement;
@@ -32,10 +28,9 @@ describe('Conversation listing Header component', () => {
   it('display user name', () => {
     render(
       <AppProviders>
-        <DataContext.Provider value={{ ...initialData, user: mockedUser }}>
-          <Header/>
-        </DataContext.Provider>
-      </AppProviders>
+        <Header/>
+      </AppProviders>,
+      { initialState: { session: { user: mockedUser } } },
     );
 
     expect(screen.getByText(mockedUser.name)).toBeInTheDocument();

@@ -1,10 +1,8 @@
 import AppProviders from '__mocks__/appProviders';
-import { initialData } from '__mocks__/data';
-import { render, screen } from '@testing-library/react';
-import DataContext from 'data/dataContext';
 import format from 'date-fns/format';
-import { ActionTypes, Message, MessageTypes, User } from 'types/Conversation';
 
+import { render, screen } from 'test-utils';
+import { ActionTypes, Message, MessageTypes, User } from 'types/Conversation';
 import MessageItem from './index';
 
 describe('Message item component', () => {
@@ -19,7 +17,7 @@ describe('Message item component', () => {
       actions: [],
       type: MessageTypes.Text,
       userId: user.id,
-      when: new Date(),
+      when: new Date().toISOString(),
     };
 
     render(
@@ -49,14 +47,14 @@ describe('Message item component', () => {
       actions: [],
       type: MessageTypes.Text,
       userId: currentUser.id,
-      when: new Date(),
+      when: new Date().toISOString(),
     };
 
     render(
       <AppProviders>
-        <DataContext.Provider value={{ ...initialData, user: currentUser }}>
+        {/* <DataContext.Provider value={{ ...initialData, user: currentUser }}> */}
           <MessageItem message={message} conversationUsers={[user]}/>
-        </DataContext.Provider>
+        {/* </DataContext.Provider> */}
       </AppProviders>
     );
 
@@ -68,7 +66,7 @@ describe('Message item component', () => {
       actions: [ActionTypes.Approve, ActionTypes.Reject],
       type: MessageTypes.Text,
       userId: '100',
-      when: new Date(),
+      when: new Date().toISOString(),
     };
 
     render(
@@ -87,7 +85,7 @@ describe('Message item component', () => {
       type: MessageTypes.Text,
       userId: '100',
       text: 'Hello world',
-      when: new Date(),
+      when: new Date().toISOString(),
     };
 
     render(
@@ -106,7 +104,7 @@ describe('Message item component', () => {
       type: MessageTypes.Text,
       userId: '100',
       text: 'Hello world',
-      when: new Date(),
+      when: new Date().toISOString(),
     };
 
     render(
@@ -115,7 +113,7 @@ describe('Message item component', () => {
       </AppProviders>
     );
 
-    expect(screen.getByText(format(message.when, 'p'))).toBeInTheDocument();
+    expect(screen.getByText(format(new Date(message.when), 'p'))).toBeInTheDocument();
   });
 
   it('display message date and time if wasn\'t sent today', () => {
@@ -124,7 +122,7 @@ describe('Message item component', () => {
       type: MessageTypes.Text,
       userId: '100',
       text: 'Hello world',
-      when: new Date('2021-01-31T12:00:00.000Z'),
+      when: '2021-01-31T12:00:00.000Z',
     };
 
     render(
@@ -133,6 +131,6 @@ describe('Message item component', () => {
       </AppProviders>
     );
 
-    expect(screen.getByText(format(message.when, 'Pp'))).toBeInTheDocument();
+    expect(screen.getByText(format(new Date(message.when), 'Pp'))).toBeInTheDocument();
   });
 });

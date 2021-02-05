@@ -1,9 +1,8 @@
 import AppProviders from '__mocks__/appProviders';
-import { initialData } from '__mocks__/data';
-import { render, screen } from '@testing-library/react';
-import DataContext from 'data/dataContext';
-import { Conversation } from 'types/Conversation';
+// import { render, screen } from '@testing-library/react';
 
+import { render, screen } from 'test-utils';
+import { Conversation } from 'types/Conversation';
 import ConversationListing from './index';
 
 jest.mock('./Header', () => () => <div data-testid="header-component"/>);
@@ -13,9 +12,7 @@ describe('Conversation list component', () => {
   it('display the Header component', () => {
     render(
       <AppProviders>
-        <DataContext.Provider value={initialData}>
-          <ConversationListing/>
-        </DataContext.Provider>
+        <ConversationListing/>
       </AppProviders>
     );
 
@@ -48,13 +45,14 @@ describe('Conversation list component', () => {
         type: 'buyer',
         users: [],
       },
-    ]
+    ];
+
+
     render(
       <AppProviders>
-        <DataContext.Provider value={{ ...initialData, conversations: conversations}}>
-          <ConversationListing/>
-        </DataContext.Provider>
-      </AppProviders>
+        <ConversationListing/>
+      </AppProviders>,
+      { initialState: { conversations: { conversations } } },
     );
 
     const conversationsCount = screen.getAllByTestId('list-item');

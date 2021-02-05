@@ -1,15 +1,20 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import format from 'date-fns/format';
+import { useDispatch } from 'react-redux';
 
 import AppProviders from '__mocks__/appProviders';
-import { initialData } from '__mocks__/data';
-import DataContext from 'data/dataContext';
 import { Conversation, Message, MessageTypes } from 'types/Conversation';
 
 import Item from './index';
+import { Action } from '@reduxjs/toolkit';
+
+jest.mock('react-redux', () => ({
+  useDispatch: jest.fn(),
+  useSelector: jest.fn(),
+}));
 
 const message: Message = {
-  when: new Date(),
+  when: new Date().toISOString(),
   userId: '1001',
   actions: [],
   type: MessageTypes.Text,
@@ -27,33 +32,29 @@ const conversation: Conversation = {
 
 describe('Conversation listing Item component', () => {
   it('display last message time if the message was sent today', () => {
-    const localMessage = { ...message, when: new Date() };
+    const localMessage = { ...message, when: new Date().toISOString() };
     const localConversation = { ...conversation, messages: [localMessage] };
 
     render(
       <AppProviders>
-        <DataContext.Provider value={initialData}>
-          <Item conversation={localConversation} active={false}/>
-        </DataContext.Provider>
+        <Item conversation={localConversation} active={false}/>
       </AppProviders>
     );
 
-    expect(screen.getByText(format(localMessage.when, 'p'))).toBeInTheDocument();
+    expect(screen.getByText(format(new Date(localMessage.when), 'p'))).toBeInTheDocument();
   });
 
   it('display last message date if the message was sent before today', () => {
-    const localMessage = { ...message, when: new Date('2021-02-01T10:00:00.000Z') };
+    const localMessage = { ...message, when: '2021-02-01T10:00:00.000Z' };
     const localConversation = { ...conversation, messages: [localMessage] };
 
     render(
       <AppProviders>
-        <DataContext.Provider value={initialData}>
-          <Item conversation={localConversation} active={false}/>
-        </DataContext.Provider>
+        <Item conversation={localConversation} active={false}/>
       </AppProviders>
     );
 
-    expect(screen.getByText(format(localMessage.when, 'P'))).toBeInTheDocument();
+    expect(screen.getByText(format(new Date(localMessage.when), 'P'))).toBeInTheDocument();
   });
 
   it('display conversation title', () => {
@@ -61,9 +62,7 @@ describe('Conversation listing Item component', () => {
 
     render(
       <AppProviders>
-        <DataContext.Provider value={initialData}>
-          <Item conversation={localConversation} active={false}/>
-        </DataContext.Provider>
+        <Item conversation={localConversation} active={false}/>
       </AppProviders>
     );
 
@@ -79,9 +78,7 @@ describe('Conversation listing Item component', () => {
 
     render(
       <AppProviders>
-        <DataContext.Provider value={initialData}>
-          <Item conversation={localConversation} active={false}/>
-        </DataContext.Provider>
+        <Item conversation={localConversation} active={false}/>
       </AppProviders>
     );
 
@@ -97,9 +94,7 @@ describe('Conversation listing Item component', () => {
 
     render(
       <AppProviders>
-        <DataContext.Provider value={initialData}>
-          <Item conversation={localConversation} active={false}/>
-        </DataContext.Provider>
+        <Item conversation={localConversation} active={false}/>
       </AppProviders>
     );
 
@@ -114,9 +109,7 @@ describe('Conversation listing Item component', () => {
 
     render(
       <AppProviders>
-        <DataContext.Provider value={initialData}>
-          <Item conversation={localConversation} active={false}/>
-        </DataContext.Provider>
+        <Item conversation={localConversation} active={false}/>
       </AppProviders>
     );
 
@@ -126,13 +119,14 @@ describe('Conversation listing Item component', () => {
   it('call selectConversation function on click', () => {
     const localConversation = { ...conversation, title: 'First conversation' };
 
-    const selectConversation = jest.fn();
+    type DispatchedActionType = { payload: unknown } & Action;
+    const dispatchList: DispatchedActionType[] = [];
+
+    (useDispatch as jest.Mock) .mockImplementation(() => (action: DispatchedActionType) => dispatchList.push(action));
 
     render(
       <AppProviders>
-        <DataContext.Provider value={{ ...initialData, selectConversation }}>
-          <Item conversation={localConversation} active={false}/>
-        </DataContext.Provider>
+        <Item conversation={localConversation} active={false}/>
       </AppProviders>
     );
 
@@ -140,6 +134,9 @@ describe('Conversation listing Item component', () => {
 
     fireEvent.click(element);
 
-    expect(selectConversation).toHaveBeenCalledWith(localConversation.id);
+    expect(dispatchList).toEqual([{
+      payload: localConversation.id,
+      type: 'conversations/selectConversationId'
+    }]);
   });
 });

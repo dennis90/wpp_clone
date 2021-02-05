@@ -19,6 +19,8 @@ const ConversationItem: React.FC<ConversationProps> = (props) => {
   const unreadCount = props.conversation.messages.filter((message) => !message.read).length;
   const lastMessage = props.conversation.messages[0];
 
+  const lastMessageDate = new Date(props.conversation.messages[0].when);
+
   return (
     <StyledContainer
       active={props.active}
@@ -33,7 +35,7 @@ const ConversationItem: React.FC<ConversationProps> = (props) => {
           </StyledTitle>
 
           <StyledDateText>
-            {format(lastMessage.when, isToday(lastMessage.when) ? 'p' : 'P')}
+            {format(lastMessageDate, isToday(lastMessageDate) ? 'p' : 'P')}
           </StyledDateText>
         </StyledRow>
 
