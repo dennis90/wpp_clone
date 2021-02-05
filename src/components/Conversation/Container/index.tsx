@@ -1,12 +1,14 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import { useSelector } from 'react-redux';
 
-import DataContext from 'data/dataContext';
+import { StoreState } from 'store';
 import ActiveConversation from './ActiveConversation';
 import EmptyPlaceholder from './EmptyPlaceholder';
 import { StyledContainer } from './styles';
 
 const ConversationContainer: React.FC = () => {
-  const { selectedConversation } = useContext(DataContext);
+  const conversationsState = useSelector((store: StoreState) => store.conversations);
+  const selectedConversation = conversationsState.conversations.find(({ id }) => id === conversationsState.selectedConversationId);
 
   return (
     <StyledContainer>

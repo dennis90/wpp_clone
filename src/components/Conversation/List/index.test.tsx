@@ -1,5 +1,5 @@
 import AppProviders from '__mocks__/appProviders';
-import { initialData } from '__mocks__/dataContextMock';
+import { initialData } from '__mocks__/data';
 import { render, screen } from '@testing-library/react';
 import DataContext from 'data/dataContext';
 import { Conversation } from 'types/Conversation';

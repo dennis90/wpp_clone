@@ -2,9 +2,11 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import React from 'react';
+import { Provider as ReduxProvider } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
 import { GlobalStyle } from 'styles/global';
 
+import store from 'store';
 
 const theme = createMuiTheme();
 
@@ -16,8 +18,10 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => (
     </Head>
 
     <ThemeProvider theme={theme}>
-      <GlobalStyle/>
-      <Component {...pageProps} />
+      <ReduxProvider store={store}>
+        <GlobalStyle/>
+        <Component {...pageProps} />
+      </ReduxProvider>
     </ThemeProvider>
 
   </>

@@ -1,12 +1,13 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import { useSelector } from 'react-redux';
 
-import DataContext from 'data/dataContext';
+import { StoreState } from 'store';
 import Header from './Header';
 import ConversationItem from './Item';
 import { StyledContainer } from './styles';
 
 const ConversationList: React.FC = () => {
-  const { conversations, selectedConversation } = useContext(DataContext);
+  const { conversations, selectedConversationId } = useSelector((store: StoreState) => store.conversations);
 
   return (
     <StyledContainer>
@@ -15,7 +16,7 @@ const ConversationList: React.FC = () => {
       {conversations.map((conversation) =>
         <ConversationItem
           key={conversation.id}
-          active={conversation.id === selectedConversation?.id}
+          active={conversation.id === selectedConversationId}
           conversation={conversation}
         />,
       )}

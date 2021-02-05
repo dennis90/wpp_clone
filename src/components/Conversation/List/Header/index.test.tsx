@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 
 import AppProviders from '__mocks__/appProviders';
-import { initialData } from '__mocks__/dataContextMock';
+import { initialData } from '__mocks__/data';
 import DataContext from 'data/dataContext';
 import { User } from 'types/Conversation';
 import Header from './index';

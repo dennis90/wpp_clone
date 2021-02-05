@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Conversation } from 'types/Conversation';
 import Header from './Header';
+import MessageBar from './MessageBar';
 import MessageItem from './MessageItem';
 import { StyledMessagesContainer } from './styles';
 
@@ -26,6 +27,8 @@ const ActiveConversation: React.FC<ActiveConversationProps> = (props) => (
         />,
       )}
     </StyledMessagesContainer>
+
+    <MessageBar/>
   </div>
 );
 

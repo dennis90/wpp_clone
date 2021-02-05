@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import format from 'date-fns/format';
 
 import AppProviders from '__mocks__/appProviders';
-import { initialData } from '__mocks__/dataContextMock';
+import { initialData } from '__mocks__/data';
 import DataContext from 'data/dataContext';
 import { Conversation, Message, MessageTypes } from 'types/Conversation';
 

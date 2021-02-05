@@ -3,10 +3,11 @@ import Button from '@material-ui/core/Button';
 import format from 'date-fns/format';
 import isToday from 'date-fns/isToday';
 import marked from 'marked';
-import React, { useContext } from 'react';
+import React from 'react';
+import { useSelector } from 'react-redux';
 
-import DataContext from 'data/dataContext';
 import { Message, User } from 'types/Conversation';
+import { StoreState } from 'store';
 import { StyledActionsContainer, StyledAvatarContainer, StyledDate, StyledMessageContent, StyledReceivedMessage } from './styles';
 
 export interface MessageItemProps {
@@ -15,7 +16,7 @@ export interface MessageItemProps {
 }
 
 const MessageItem: React.FC<MessageItemProps> = ({ message, conversationUsers: users }) => {
-  const { user: appUser } = useContext(DataContext);
+  const appUser = useSelector((store: StoreState) => store.session.user);
 
   const messageFrom = users.find((user) => user.id === message.userId);
   const sent = messageFrom?.id === appUser?.id;

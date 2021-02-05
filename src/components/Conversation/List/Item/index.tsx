@@ -1,9 +1,10 @@
 import Avatar from '@material-ui/core/Avatar';
 import format from 'date-fns/format';
 import isToday from 'date-fns/isToday';
-import React, { useContext } from 'react';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 
-import DataContext from 'data/dataContext';
+import { actions } from 'store/conversations';
 import { Conversation } from 'types/Conversation';
 import { StyledBadge, StyledContainer, StyledDateText, StyledInfoContainer, StyledLastMessage, StyledRow, StyledTitle } from './styles';
 
@@ -13,14 +14,15 @@ export interface ConversationProps {
 }
 
 const ConversationItem: React.FC<ConversationProps> = (props) => {
-  const { selectConversation } = useContext(DataContext);
+  const dispatch = useDispatch();
+
   const unreadCount = props.conversation.messages.filter((message) => !message.read).length;
   const lastMessage = props.conversation.messages[0];
 
   return (
     <StyledContainer
       active={props.active}
-      onClick={() => selectConversation(props.conversation.id)}
+      onClick={() => dispatch(actions.selectConversationId(props.conversation.id))}
     >
       <Avatar alt={props.conversation.title} src={props.conversation.image}/>
 

@@ -1,17 +1,18 @@
 import Avatar from '@material-ui/core/Avatar';
-import React, { useContext } from 'react';
+import React from 'react';
+import { useSelector } from 'react-redux';
 
-import DataContext from 'data/dataContext';
+import { StoreState } from 'store';
 import { StyledUserHeader, StyledUserName } from './styles';
 
 const ListHeader: React.FC = () => {
-  const { user } = useContext(DataContext);
+  const appUser = useSelector((store: StoreState) => store.session.user);
 
   return (
     <StyledUserHeader>
-      <Avatar src={user?.profilePicture} alt={user?.name}/>
+      <Avatar src={appUser?.profilePicture} alt={appUser?.name}/>
       <StyledUserName>
-        {user?.name}
+        {appUser?.name}
       </StyledUserName>
     </StyledUserHeader>
   );
