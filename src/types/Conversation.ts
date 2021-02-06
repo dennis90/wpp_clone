@@ -37,9 +37,14 @@ export const messageTypeAvailableActions: Record<MessageTypes, ActionTypes[]> = 
   [MessageTypes.Text]: [],
 };
 
+export interface FileInfo {
+  name: string;
+  path: string;
+}
+
 export interface Message {
   actions: ActionTypes[];
-  media?: Blob;
+  file?: FileInfo;
   read?: boolean;
   text?: string;
   type: MessageTypes;

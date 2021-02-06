@@ -7,7 +7,8 @@ import marked from 'marked';
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import { Message, User } from 'types/Conversation';
+import MediaTypeUnknown from 'components/Messages/MediaTypes/Unknown';
+import { Message, MessageTypes, User } from 'types/Conversation';
 import { StoreState } from 'store';
 import { StyledActionsContainer, StyledAvatarContainer, StyledDate, StyledMessageContent, StyledReceivedMessage } from './styles';
 
@@ -34,9 +35,15 @@ const MessageItem: React.FC<MessageItemProps> = ({ message, conversationUsers: u
       }
 
       <div>
-        {message.text &&
+        {(message.text || message.file) &&
           <StyledReceivedMessage kind={sent ? 'sent' : 'received'}>
-            <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(marked(message.text)) }}/>
+            {message.file && message.type === MessageTypes.MediaUnknown &&
+              <MediaTypeUnknown file={message.file} downloadable={true}/>
+            }
+
+            {message.text &&
+              <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(marked(message.text)) }}/>
+            }
 
             <StyledDate>
               {isToday(messageDate) ? format(messageDate, 'p') : format(messageDate, 'Pp')}

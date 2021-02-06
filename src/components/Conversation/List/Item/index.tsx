@@ -41,7 +41,7 @@ const ConversationItem: React.FC<ConversationProps> = (props) => {
 
         <StyledRow>
           <StyledLastMessage>
-            {lastMessage.text ? lastMessage.text : lastMessage.actions.join(', ')}
+            {lastMessage.text || lastMessage.file?.name || lastMessage.actions.join(', ')}
           </StyledLastMessage>
 
           <StyledBadge badgeContent={unreadCount} color="primary"/>

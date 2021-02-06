@@ -52,9 +52,7 @@ describe('Message item component', () => {
 
     render(
       <AppProviders>
-        {/* <DataContext.Provider value={{ ...initialData, user: currentUser }}> */}
-          <MessageItem message={message} conversationUsers={[user]}/>
-        {/* </DataContext.Provider> */}
+        <MessageItem message={message} conversationUsers={[user]}/>
       </AppProviders>
     );
 

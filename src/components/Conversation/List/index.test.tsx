@@ -1,5 +1,4 @@
 import AppProviders from '__mocks__/appProviders';
-// import { render, screen } from '@testing-library/react';
 
 import { render, screen } from 'test-utils';
 import { Conversation } from 'types/Conversation';
