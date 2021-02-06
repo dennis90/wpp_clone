@@ -14,9 +14,9 @@ export const StyledConversationDetails = styled.div`
 
 export const StyledTitle = styled.h2`
   margin: 0;
-  font-size: 1.8rem;
+  font-size: 1.2rem;
 `;
 
 export const StyledParticipants = styled.span`
-  font-size: 1.2rem;
+  font-size: .9rem;
 `;

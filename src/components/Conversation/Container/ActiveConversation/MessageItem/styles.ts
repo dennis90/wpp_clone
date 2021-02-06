@@ -30,7 +30,7 @@ export const StyledMessageContent = styled.div<StyledMessageContentProps>`
 
 export const StyledDate = styled.p`
   text-align: right;
-  font-size: 1.2rem;
+  font-size: .7rem;
   color: ${({ theme }: { theme: Theme }) => theme.palette.text.secondary};
 `;
 
@@ -38,7 +38,9 @@ export const StyledActionsContainer = styled.div`
   display: flex;
   margin: 10px 0;
   flex-wrap: wrap;
+
   button {
+    font-size: .7rem;
     margin-bottom: 10px;
     min-width: 80px;
   }

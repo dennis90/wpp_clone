@@ -4,14 +4,14 @@ import { Conversation } from 'types/Conversation';
 import Header from './Header';
 import MessageBar from './MessageBar';
 import MessageItem from './MessageItem';
-import { StyledMessagesContainer } from './styles';
+import { StyledConversationContent, StyledMessagesContainer } from './styles';
 
 export interface ActiveConversationProps {
   conversation: Conversation;
 }
 
 const ActiveConversation: React.FC<ActiveConversationProps> = (props) => (
-  <div>
+  <StyledConversationContent>
     <Header
       image={props.conversation.image}
       title={props.conversation.title}
@@ -29,7 +29,7 @@ const ActiveConversation: React.FC<ActiveConversationProps> = (props) => (
     </StyledMessagesContainer>
 
     <MessageBar/>
-  </div>
+  </StyledConversationContent>
 );
 
 export default ActiveConversation;

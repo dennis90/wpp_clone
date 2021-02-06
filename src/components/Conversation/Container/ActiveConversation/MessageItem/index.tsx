@@ -2,6 +2,7 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import format from 'date-fns/format';
 import isToday from 'date-fns/isToday';
+import DOMPurify from 'dompurify';
 import marked from 'marked';
 import React from 'react';
 import { useSelector } from 'react-redux';
@@ -35,7 +36,7 @@ const MessageItem: React.FC<MessageItemProps> = ({ message, conversationUsers: u
       <div>
         {message.text &&
           <StyledReceivedMessage kind={sent ? 'sent' : 'received'}>
-            <p dangerouslySetInnerHTML={{ __html: marked(message.text) }}/>
+            <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(marked(message.text)) }}/>
 
             <StyledDate>
               {isToday(messageDate) ? format(messageDate, 'p') : format(messageDate, 'Pp')}

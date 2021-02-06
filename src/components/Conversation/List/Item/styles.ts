@@ -47,7 +47,7 @@ export const StyledLastMessage = styled.span`
 `;
 
 export const StyledDateText = styled.span`
-  font-size: 1rem;
+  font-size: .7rem;
   margin: auto 0;
 `;
 

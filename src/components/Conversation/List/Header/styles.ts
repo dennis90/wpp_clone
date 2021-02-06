@@ -12,6 +12,6 @@ export const StyledUserHeader = styled.div`
 export const StyledUserName = styled.span`
   flex: 1;
   margin: auto 20px;
-  font-size: 2rem;
+  font-size: 1.4rem;
   font-weight: 600;
 `;
