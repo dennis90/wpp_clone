@@ -7,8 +7,10 @@ import EmptyPlaceholder from './EmptyPlaceholder';
 import { StyledContainer } from './styles';
 
 const ConversationContainer: React.FC = () => {
-  const conversationsState = useSelector((store: StoreState) => store.conversations);
-  const selectedConversation = conversationsState.conversations.find(({ id }) => id === conversationsState.selectedConversationId);
+  const { conversations, selectedConversationId } = useSelector((store: StoreState) => store.conversations);
+  const selectedConversation = selectedConversationId
+    ? conversations.find(({ id }) => id === selectedConversationId)
+    : undefined;
 
   return (
     <StyledContainer>
