@@ -4,11 +4,10 @@ import marked from 'marked';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import MediaTypeUnknown from 'components/Messages/MediaTypes/Unknown';
 import { StoreState } from 'store';
 import { actions } from 'store/conversations';
-import { Message, MessageTypes } from 'types/Conversation';
-import MessageExtraField from './MessageExtraField';
+import { actions as actionPanelActions } from 'store/actionPanel'
+import { ActionTypes, Message, MessageTypes } from 'types/Conversation';
 import UploadDocument from './UploadDocument';
 import { StyledMessageBarContainer, StyledTextField, StyledNewMessageContent, StyledIconButton } from './styles';
 
@@ -32,11 +31,12 @@ const MessageBar: React.FC = () => {
     // TODO: This file should be uploaded to a media storage service
     const filePath = window.URL.createObjectURL(file);
 
-    setMessage({
-      ...message,
-      file: { name: file.name, path: filePath },
-      type: MessageTypes.MediaUnknown,
-    });
+    dispatch(actionPanelActions.setPanelInfo({
+      actionType: ActionTypes.SendDocument,
+      documentName: file.name,
+      documentPath: filePath,
+      initialMessage: message.text ?? '',
+    }));
   };
 
   const messageTextChangeHandler = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -54,14 +54,6 @@ const MessageBar: React.FC = () => {
     setMessage(initialMessageValue);
   }
 
-  const cancelMessage = (): void => {
-    setMessage({
-      ...message,
-      file: undefined,
-      type: MessageTypes.Text,
-    });
-  };
-
   const inputHelperText = (
     <span
       dangerouslySetInnerHTML={{
@@ -77,15 +69,6 @@ const MessageBar: React.FC = () => {
 
   return (
     <StyledMessageBarContainer>
-      {message.type === MessageTypes.MediaUnknown && message.file &&
-        <MessageExtraField
-          onCancel={cancelMessage}
-          title="Digite a legenda do arquivo"
-        >
-          <MediaTypeUnknown file={message.file}/>
-        </MessageExtraField>
-      }
-
       <StyledNewMessageContent>
         <UploadDocument onChange={fileUploadChangeHandler} id="attach-file-input"/>
         <CameraAltIcon/>

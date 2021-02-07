@@ -1,4 +1,5 @@
 import { Conversation, messageTypeAvailableActions,MessageTypes, User } from 'types/Conversation';
+import { Citizenship, CivilStatus, FormType, Gender } from 'types/Forms';
 
 type MockedUsers = 'johnDoe' | 'karen' | 'kyc';
 
@@ -38,7 +39,20 @@ export const conversations: Conversation[] = [
       {
         actions: messageTypeAvailableActions[MessageTypes.GreetingFromBuyer],
         read: true,
-        text: 'Houve um novo cadastro de Pessoa Física\n\nDados do formulário:\nNome:\t\t| José da Silva\nData de nascimento:\t\t| 22/02/1922\nCPF:\t\t | 022.332.556-65\nEndereço:\t\tRua das flores, 1022 - São Paulo, SP',
+        form: {
+          chat_id: '100',
+          form: FormType.Registration,
+          fullname: 'José da Silva',
+          birth_date: new Date('1922-02-22'),
+          mother_fullname: 'Joan Doe',
+          father_fullname: 'John Doe Sr',
+          birth_country: 'Brazil',
+          birth_state: 'São Paulo',
+          birth_city: 'São Paulo',
+          citizenship: Citizenship.Brazilian,
+          gender: Gender.Male,
+          civil_status: CivilStatus.Single,
+        },
         type: MessageTypes.Text,
         userId: users.karen.id,
         when: new Date('2021-01-31T12:30:00.000Z').toISOString(),

@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
 import { Conversation } from 'types/Conversation';
+import { actions as actionPanelActions } from 'store/actionPanel';
+import ActionModal from '../../ActionModal';
 import Header from './Header';
 import MessageBar from './MessageBar';
 import MessageItem from './MessageItem';
@@ -10,26 +13,38 @@ export interface ActiveConversationProps {
   conversation: Conversation;
 }
 
-const ActiveConversation: React.FC<ActiveConversationProps> = (props) => (
-  <StyledConversationContent>
-    <Header
-      image={props.conversation.image}
-      title={props.conversation.title}
-      users={props.conversation.users}
-    />
+const ActiveConversation: React.FC<ActiveConversationProps> = (props) => {
+  const dispatch = useDispatch();
 
-    <StyledMessagesContainer>
-      {props.conversation.messages.map((message, index) =>
-        <MessageItem
-          conversationUsers={props.conversation.users}
-          key={index}
-          message={message}
-        />,
-      )}
-    </StyledMessagesContainer>
+  useEffect(() => {
+    return () => {
+      dispatch(actionPanelActions.setPanelInfo(undefined));
+    }
+  }, [dispatch, props.conversation.id]);
 
-    <MessageBar/>
-  </StyledConversationContent>
-);
+  return (
+    <StyledConversationContent>
+      <Header
+        image={props.conversation.image}
+        title={props.conversation.title}
+        users={props.conversation.users}
+      />
+
+      <StyledMessagesContainer>
+        {props.conversation.messages.map((message, index) =>
+          <MessageItem
+            conversationUsers={props.conversation.users}
+            key={index}
+            message={message}
+          />,
+        )}
+      </StyledMessagesContainer>
+
+      <MessageBar/>
+
+      <ActionModal/>
+    </StyledConversationContent>
+  );
+};
 
 export default ActiveConversation;

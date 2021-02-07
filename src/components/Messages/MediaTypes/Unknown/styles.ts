@@ -12,6 +12,10 @@ export const StyledMediaContent = styled.div`
   &:hover {
     background-color: ${({ theme }: { theme: Theme }) => theme.palette.grey[300]};
   }
+
+  span {
+    overflow-wrap: break-word;
+  }
 `;
 
 export const StyledIconContainer = styled.div`

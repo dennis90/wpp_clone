@@ -1,9 +1,11 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 
+import actionPanelSlice from './actionPanel';
 import conversationsSlice from './conversations';
 import sessionSlice from './session';
 
 export const rootReducer = combineReducers({
+  actionPanel: actionPanelSlice,
   conversations: conversationsSlice,
   session: sessionSlice,
 });

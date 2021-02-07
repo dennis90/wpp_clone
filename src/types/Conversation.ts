@@ -1,3 +1,4 @@
+import { BuyerRegistration } from './Forms';
 export interface User {
   id: string;
   name: string;
@@ -10,6 +11,7 @@ export enum ActionTypes {
   BuyerInfo = 'buyer_info',
   SellerInfo = 'seller_info',
   Register = 'register',
+  SendDocument = 'send_document',
   ValidateDriversLicense = 'validate_drivers_license',
   ValidateCredit = 'validate_credit',
   ValidateCriminalRecord = 'validate_criminal_record',
@@ -17,10 +19,10 @@ export enum ActionTypes {
 
 export enum MessageTypes {
   GreetingFromBuyer = 'buyer_greeting',
+  GreetingFromSeller = 'seller_greeting',
   MediaAudio = 'media_audio',
   MediaImage = 'media_image',
   MediaUnknown = 'media_unknown',
-  GreetingFromSeller = 'seller_greeting',
   Text = 'text',
   ValidateDocuments = 'validate_documents',
 }
@@ -45,6 +47,7 @@ export interface FileInfo {
 export interface Message {
   actions: ActionTypes[];
   file?: FileInfo;
+  form?: BuyerRegistration; // should pipe (|) with the types of any other added form
   read?: boolean;
   text?: string;
   type: MessageTypes;

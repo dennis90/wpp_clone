@@ -29,7 +29,7 @@ export const StyledNewMessageContent = styled.div`
   }
 `;
 
-export const StyledIconButton = styled(IconButton)`
+export const StyledIconButton = styled(IconButton).attrs({ component: 'span' })`
   height: 42px;
   width: 42px;
 `;

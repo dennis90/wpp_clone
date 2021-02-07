@@ -1,4 +1,6 @@
-import { createMuiTheme } from '@material-ui/core/styles';
+import DateFnsUtils from '@date-io/date-fns';
+import { createMuiTheme, ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import React from 'react';
@@ -8,7 +10,16 @@ import { GlobalStyle } from 'styles/global';
 
 import store from 'store';
 
-const theme = createMuiTheme();
+const theme = createMuiTheme({
+  props: {
+    MuiTextField: {
+      variant: 'outlined',
+    },
+    MuiFormControl: {
+      variant: 'outlined',
+    },
+  },
+});
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => (
   <>
@@ -18,10 +29,14 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => (
     </Head>
 
     <ThemeProvider theme={theme}>
-      <ReduxProvider store={store}>
-        <GlobalStyle/>
-        <Component {...pageProps} />
-      </ReduxProvider>
+      <MuiThemeProvider theme={theme}>
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          <ReduxProvider store={store}>
+            <GlobalStyle/>
+            <Component {...pageProps} />
+          </ReduxProvider>
+        </MuiPickersUtilsProvider>
+      </MuiThemeProvider>
     </ThemeProvider>
 
   </>
