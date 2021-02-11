@@ -4,7 +4,8 @@ import { ActionTypes } from 'types/Conversation';
 
 type ActionTypeData =
   ({ actionType: ActionTypes.Register }) |
-  ({ actionType: ActionTypes.SendDocument } & { documentName: string, documentPath: string, initialMessage: string });
+  ({ actionType: ActionTypes.SendFile } & { documentName: string, documentPath: string, documentType: string, initialMessage: string }) |
+  ({ actionType: ActionTypes.TakePhoto });
 
 export interface ActionPanelSlice {
   panelInfo?: ActionTypeData;

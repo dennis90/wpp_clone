@@ -10,6 +10,7 @@ import { actions as actionPanelActions } from 'store/actionPanel'
 import { ActionTypes, Message, MessageTypes } from 'types/Conversation';
 import UploadDocument from './UploadDocument';
 import { StyledMessageBarContainer, StyledTextField, StyledNewMessageContent, StyledIconButton } from './styles';
+import { IconButton } from '@material-ui/core';
 
 export type MessageForm = Omit<Message, 'when'>
 
@@ -32,11 +33,15 @@ const MessageBar: React.FC = () => {
     const filePath = window.URL.createObjectURL(file);
 
     dispatch(actionPanelActions.setPanelInfo({
-      actionType: ActionTypes.SendDocument,
+      actionType: ActionTypes.SendFile,
       documentName: file.name,
       documentPath: filePath,
       initialMessage: message.text ?? '',
     }));
+  };
+
+  const takePictureClickHandler = (): void => {
+    dispatch(actionPanelActions.setPanelInfo({ actionType: ActionTypes.TakePhoto }));
   };
 
   const messageTextChangeHandler = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -71,7 +76,11 @@ const MessageBar: React.FC = () => {
     <StyledMessageBarContainer>
       <StyledNewMessageContent>
         <UploadDocument onChange={fileUploadChangeHandler} id="attach-file-input"/>
-        <CameraAltIcon/>
+
+        <IconButton onClick={takePictureClickHandler}>
+          <CameraAltIcon/>
+        </IconButton>
+
         <StyledTextField
           fullWidth={true}
           helperText={inputHelperText}

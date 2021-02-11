@@ -7,6 +7,7 @@ import marked from 'marked';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import MediaTypeImage from 'components/Messages/MediaTypes/Image';
 import MediaTypeUnknown from 'components/Messages/MediaTypes/Unknown';
 import { StoreState } from 'store';
 import { actions as actionPanelActions } from 'store/actionPanel';
@@ -68,8 +69,13 @@ const MessageItem: React.FC<MessageItemProps> = ({ message, conversationUsers: u
       <div>
         {(messageContent || message.file) &&
           <StyledReceivedMessage kind={sent ? 'sent' : 'received'}>
-            {message.file && message.type === MessageTypes.MediaUnknown &&
-              <MediaTypeUnknown file={message.file} downloadable={true}/>
+            {message.file && message.type === MessageTypes.File &&
+              <>
+              {message.file.type.startsWith('image')
+                ? <MediaTypeImage file={message.file} downloadable={true}/>
+                :<MediaTypeUnknown file={message.file} downloadable={true}/>
+              }
+              </>
             }
 
             {messageContent &&

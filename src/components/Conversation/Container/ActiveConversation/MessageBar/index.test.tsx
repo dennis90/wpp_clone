@@ -46,7 +46,7 @@ describe('Message bar component', () => {
 
       expect(dispatchList[0].type).toEqual('actionPanel/setPanelInfo');
       expect(dispatchList[0].payload).toEqual({
-        actionType: ActionTypes.SendDocument,
+        actionType: ActionTypes.SendFile,
         documentName: 'filename.png',
         documentPath: 'http://localhost/filename.png',
         initialMessage: ''
@@ -80,7 +80,7 @@ describe('Message bar component', () => {
 
       expect(dispatchList[0].type).toEqual('actionPanel/setPanelInfo');
       expect(dispatchList[0].payload).toEqual({
-        actionType: ActionTypes.SendDocument,
+        actionType: ActionTypes.SendFile,
         documentName: 'filename.png',
         documentPath: 'http://localhost/filename.png',
         initialMessage: 'Hello World!'

@@ -4,7 +4,7 @@ import AppProviders from '__mocks__/appProviders';
 import { render, screen } from 'test-utils';
 import { ActionTypes, Message } from 'types/Conversation';
 import { StoreState } from 'store';
-import SendDocument from './index';
+import SendFile from './index';
 import { Action } from 'redux';
 import { fireEvent } from '@testing-library/dom';
 import { users } from '__mocks__/data';
@@ -18,18 +18,19 @@ jest.mock('react-redux', () => {
   }
 });
 
-describe('SendDocument Component', () => {
+describe('SendFile Component', () => {
   it('fill the TextField with initial message', () => {
     const actionPanelInitialState: StoreState['actionPanel']['panelInfo'] = {
-      actionType: ActionTypes.SendDocument,
+      actionType: ActionTypes.SendFile,
       documentName: 'document.pdf',
       documentPath: 'http://localhost:3000/document.pdf',
+      documentType: 'application/pdf',
       initialMessage: 'Hello World!',
     };
 
     render(
       <AppProviders>
-        <SendDocument/>
+        <SendFile/>
       </AppProviders>,
       {
         initialState: {
@@ -45,15 +46,16 @@ describe('SendDocument Component', () => {
 
   it('render MessageUnknown card with received filename', () => {
     const actionPanelInitialState: StoreState['actionPanel']['panelInfo'] = {
-      actionType: ActionTypes.SendDocument,
+      actionType: ActionTypes.SendFile,
       documentName: 'document.pdf',
       documentPath: 'http://localhost:3000/document.pdf',
+      documentType: 'application/pdf',
       initialMessage: 'Hello World!',
     };
 
     render(
       <AppProviders>
-        <SendDocument/>
+        <SendFile/>
       </AppProviders>,
       {
         initialState: {
@@ -73,15 +75,16 @@ describe('SendDocument Component', () => {
     (useDispatch as jest.Mock) .mockImplementation(() => (action: DispatchedActionType) => dispatchList.push(action));
 
     const actionPanelInitialState: StoreState['actionPanel']['panelInfo'] = {
-      actionType: ActionTypes.SendDocument,
+      actionType: ActionTypes.SendFile,
       documentName: 'document.pdf',
       documentPath: 'http://localhost:3000/document.pdf',
+      documentType: 'application/pdf',
       initialMessage: '',
     };
 
     render(
       <AppProviders>
-        <SendDocument/>
+        <SendFile/>
       </AppProviders>,
       {
         initialState: {
@@ -106,10 +109,11 @@ describe('SendDocument Component', () => {
       file: {
         name: 'document.pdf',
         path: 'http://localhost:3000/document.pdf',
+        type: 'application/pdf',
       },
       read: true,
       text: '',
-      type: 'media_unknown',
+      type: 'file',
       userId: users.johnDoe.id,
     });
 
@@ -122,15 +126,16 @@ describe('SendDocument Component', () => {
     (useDispatch as jest.Mock) .mockImplementation(() => (action: DispatchedActionType) => dispatchList.push(action));
 
     const actionPanelInitialState: StoreState['actionPanel']['panelInfo'] = {
-      actionType: ActionTypes.SendDocument,
+      actionType: ActionTypes.SendFile,
       documentName: 'document.pdf',
       documentPath: 'http://localhost:3000/document.pdf',
+      documentType: 'application/pdf',
       initialMessage: '',
     };
 
     render(
       <AppProviders>
-        <SendDocument/>
+        <SendFile/>
       </AppProviders>,
       {
         initialState: {
@@ -152,12 +157,13 @@ describe('SendDocument Component', () => {
     expect(payload).toEqual({
       actions: [],
       file: {
-        name: 'document.pdf',
-        path: 'http://localhost:3000/document.pdf',
+        name: actionPanelInitialState.documentName,
+        path: actionPanelInitialState.documentPath,
+        type: actionPanelInitialState.documentType,
       },
       read: true,
       text: 'New message',
-      type: 'media_unknown',
+      type: 'file',
       userId: '',
     });
 
@@ -170,15 +176,16 @@ describe('SendDocument Component', () => {
     (useDispatch as jest.Mock) .mockImplementation(() => (action: DispatchedActionType) => dispatchList.push(action));
 
     const actionPanelInitialState: StoreState['actionPanel']['panelInfo'] = {
-      actionType: ActionTypes.SendDocument,
+      actionType: ActionTypes.SendFile,
       documentName: 'document.pdf',
       documentPath: 'http://localhost:3000/document.pdf',
+      documentType: 'application/pdf',
       initialMessage: '',
     };
 
     render(
       <AppProviders>
-        <SendDocument/>
+        <SendFile/>
       </AppProviders>,
       {
         initialState: {

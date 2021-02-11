@@ -7,22 +7,21 @@ export interface User {
 
 export enum ActionTypes {
   Approve = 'approve',
-  Reject = 'reject',
   BuyerInfo = 'buyer_info',
-  SellerInfo = 'seller_info',
   Register = 'register',
-  SendDocument = 'send_document',
-  ValidateDriversLicense = 'validate_drivers_license',
+  Reject = 'reject',
+  SellerInfo = 'seller_info',
+  SendFile = 'send_file',
+  TakePhoto = 'send_photo',
   ValidateCredit = 'validate_credit',
   ValidateCriminalRecord = 'validate_criminal_record',
+  ValidateDriversLicense = 'validate_drivers_license',
 }
 
 export enum MessageTypes {
+  File = 'file',
   GreetingFromBuyer = 'buyer_greeting',
   GreetingFromSeller = 'seller_greeting',
-  MediaAudio = 'media_audio',
-  MediaImage = 'media_image',
-  MediaUnknown = 'media_unknown',
   Text = 'text',
   ValidateDocuments = 'validate_documents',
 }
@@ -33,15 +32,14 @@ export const messageTypeAvailableActions: Record<MessageTypes, ActionTypes[]> = 
   [MessageTypes.ValidateDocuments]: [
     ActionTypes.ValidateDriversLicense, ActionTypes.ValidateCredit, ActionTypes.ValidateCriminalRecord
   ],
-  [MessageTypes.MediaAudio]: [],
-  [MessageTypes.MediaImage]: [],
-  [MessageTypes.MediaUnknown]: [],
+  [MessageTypes.File]: [],
   [MessageTypes.Text]: [],
 };
 
 export interface FileInfo {
   name: string;
   path: string;
+  type: string;
 }
 
 export interface Message {

@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import ActionModalHeader from 'components/Conversation/ActionModal/Header';
+import MediaTypeImage from 'components/Messages/MediaTypes/Image';
 import MediaTypeUnknown from 'components/Messages/MediaTypes/Unknown';
 import { StoreState } from 'store';
 import { actions as actionPanelActions } from 'store/actionPanel';
@@ -12,15 +13,15 @@ import { actions as conversationActions } from 'store/conversations';
 import { ActionTypes, MessageTypes } from 'types/Conversation';
 import { StyledPanelContainer, StyledPanelContent, StyledPanelFooter } from './styles';
 
-const SendDocument: React.FC = () => {
+const SendFile: React.FC = () => {
   const panelInfo = useSelector((store: StoreState) => store.actionPanel.panelInfo);
   const { selectedConversationId } = useSelector((store: StoreState) => store.conversations);
   const appUser = useSelector((store: StoreState) => store.session.user);
 
   const dispatch = useDispatch();
-  const [messageText, setMessageText] = useState<string>(panelInfo?.actionType === ActionTypes.SendDocument ? panelInfo.initialMessage : '');
+  const [messageText, setMessageText] = useState<string>(panelInfo?.actionType === ActionTypes.SendFile ? panelInfo.initialMessage : '');
 
-  if (panelInfo?.actionType !== ActionTypes.SendDocument || selectedConversationId === undefined) {
+  if (panelInfo?.actionType !== ActionTypes.SendFile || selectedConversationId === undefined) {
     return null;
   }
 
@@ -31,12 +32,13 @@ const SendDocument: React.FC = () => {
   const sendMessageClickHandler = (): void => {
     dispatch(conversationActions.sendMessage({
       actions: [],
-      type: MessageTypes.MediaUnknown,
+      type: MessageTypes.File,
       userId: appUser?.id ?? '',
       when: new Date().toISOString(),
       file: {
         name: panelInfo.documentName,
         path: panelInfo.documentPath,
+        type: panelInfo.documentType,
       },
       read: true,
       text: messageText,
@@ -45,6 +47,12 @@ const SendDocument: React.FC = () => {
     dispatch(actionPanelActions.setPanelInfo(undefined));
   }
 
+  const file = {
+    name: panelInfo.documentName,
+    path: panelInfo.documentPath,
+    type: panelInfo.documentType,
+  };
+
   return (
     <StyledPanelContainer>
       <ActionModalHeader>
@@ -52,10 +60,10 @@ const SendDocument: React.FC = () => {
       </ActionModalHeader>
 
       <StyledPanelContent>
-        <MediaTypeUnknown
-          file={{ name: panelInfo.documentName, path: panelInfo.documentPath }}
-          downloadable={false}
-        />
+        {panelInfo.documentType.startsWith('image')
+          ? <MediaTypeImage file={file} downloadable={false}/>
+          : <MediaTypeUnknown file={file} downloadable={false}/>
+        }
       </StyledPanelContent>
 
       <StyledPanelFooter>
@@ -78,4 +86,4 @@ const SendDocument: React.FC = () => {
   );
 };
 
-export default SendDocument;
+export default SendFile;
