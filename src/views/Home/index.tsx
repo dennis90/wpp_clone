@@ -23,10 +23,10 @@ const Home: React.FC = () => {
 
   return (
     <StyledContainer>
-      <ConversationList/>
-      <ConversationContainer/>
+      <ConversationList />
+      <ConversationContainer />
     </StyledContainer>
   );
-}
+};
 
 export default Home;

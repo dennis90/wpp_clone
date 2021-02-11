@@ -12,16 +12,16 @@ const UnknownMedia: React.FC<UnknownMediaProps> = ({ downloadable = false, file 
   return (
     <StyledMediaContent>
       <StyledIconContainer>
-        <StyledImage src={file.path} alt={file.name}/>
+        <StyledImage src={file.path} alt={file.name} />
       </StyledIconContainer>
 
       {!downloadable && <span>{file.name}</span>}
 
-      {downloadable &&
+      {downloadable && (
         <a href={file.path} download={file.name}>
           {file.name}
         </a>
-      }
+      )}
     </StyledMediaContent>
   );
 };

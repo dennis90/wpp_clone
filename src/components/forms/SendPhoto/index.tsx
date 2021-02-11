@@ -18,21 +18,19 @@ const SendPhoto: React.FC = () => {
   const dispatch = useDispatch();
 
   const getStream = (): void => {
-    navigator.mediaDevices
-      .getUserMedia({ audio: false, video: { facingMode: 'user' } })
-      .then((mediaStream) => {
-        mediaStreamRef.current = mediaStream;
+    navigator.mediaDevices.getUserMedia({ audio: false, video: { facingMode: 'user' } }).then((mediaStream) => {
+      mediaStreamRef.current = mediaStream;
 
-        if (videoElementRef.current) {
-          videoElementRef.current.srcObject = mediaStream;
-        }
-      });
+      if (videoElementRef.current) {
+        videoElementRef.current.srcObject = mediaStream;
+      }
+    });
   };
 
   const stopMediaStream = (): void => {
     if (mediaStreamRef.current && (mediaStreamRef.current.getVideoTracks || mediaStreamRef.current.getAudioTracks)) {
-      mediaStreamRef.current.getVideoTracks().map(track => track.stop());
-      mediaStreamRef.current.getAudioTracks().map(track => track.stop());
+      mediaStreamRef.current.getVideoTracks().map((track) => track.stop());
+      mediaStreamRef.current.getAudioTracks().map((track) => track.stop());
     }
 
     if (videoElementRef.current) {
@@ -60,13 +58,15 @@ const SendPhoto: React.FC = () => {
 
   const sendPhotoClickHandler = (): void => {
     if (photo) {
-      dispatch(actionPanelActions.setPanelInfo({
-        actionType: ActionTypes.SendFile,
-        documentType: PHOTO_MIME,
-        documentName: `photo_${new Date().toISOString()}.png`,
-        documentPath: photo,
-        initialMessage: '',
-      }));
+      dispatch(
+        actionPanelActions.setPanelInfo({
+          actionType: ActionTypes.SendFile,
+          documentType: PHOTO_MIME,
+          documentName: `photo_${new Date().toISOString()}.png`,
+          documentPath: photo,
+          initialMessage: '',
+        }),
+      );
     }
   };
 
@@ -74,18 +74,16 @@ const SendPhoto: React.FC = () => {
     getStream();
 
     return () => {
-      stopMediaStream()
+      stopMediaStream();
     };
   }, []);
 
   return (
     <div>
-      <ActionModalHeader>
-        Tire uma foto
-      </ActionModalHeader>
+      <ActionModalHeader>Tire uma foto</ActionModalHeader>
 
       <div>
-        {!photo &&
+        {!photo && (
           <video
             aria-label="Camera input"
             autoPlay={true}
@@ -95,20 +93,18 @@ const SendPhoto: React.FC = () => {
             ref={videoElementRef}
             width={PHOTO_WIDTH}
           />
-        }
+        )}
 
-        {photo &&
-          <img src={photo} alt="Camera capture"/>
-        }
+        {photo && <img src={photo} alt="Camera capture" />}
       </div>
 
-      {!photo &&
+      {!photo && (
         <Button color="primary" onClick={takePhotoClickHandler}>
           Tirar foto
         </Button>
-      }
+      )}
 
-      {photo &&
+      {photo && (
         <>
           <Button color="primary" onClick={sendPhotoClickHandler}>
             Enviar foto
@@ -118,7 +114,7 @@ const SendPhoto: React.FC = () => {
             Tirar outra foto
           </Button>
         </>
-      }
+      )}
     </div>
   );
 };

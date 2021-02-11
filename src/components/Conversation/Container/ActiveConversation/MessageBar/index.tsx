@@ -5,14 +5,14 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { StoreState } from 'store';
-import { actions } from 'store/conversations';
-import { actions as actionPanelActions } from 'store/actionPanel'
+import { actions as conversationsActions } from 'store/conversations';
+import { actions as actionPanelActions } from 'store/actionPanel';
 import { ActionTypes, Message, MessageTypes } from 'types/Conversation';
 import UploadDocument from './UploadDocument';
 import { StyledMessageBarContainer, StyledTextField, StyledNewMessageContent, StyledIconButton } from './styles';
 import { IconButton } from '@material-ui/core';
 
-export type MessageForm = Omit<Message, 'when'>
+export type MessageForm = Omit<Message, 'when'>;
 
 const MessageBar: React.FC = () => {
   const appUser = useSelector((store: StoreState) => store.session.user);
@@ -32,12 +32,15 @@ const MessageBar: React.FC = () => {
     // TODO: This file should be uploaded to a media storage service
     const filePath = window.URL.createObjectURL(file);
 
-    dispatch(actionPanelActions.setPanelInfo({
-      actionType: ActionTypes.SendFile,
-      documentName: file.name,
-      documentPath: filePath,
-      initialMessage: message.text ?? '',
-    }));
+    dispatch(
+      actionPanelActions.setPanelInfo({
+        actionType: ActionTypes.SendFile,
+        documentName: file.name,
+        documentPath: filePath,
+        documentType: file.type,
+        initialMessage: message.text ?? '',
+      }),
+    );
   };
 
   const takePictureClickHandler = (): void => {
@@ -52,33 +55,34 @@ const MessageBar: React.FC = () => {
   };
 
   const sendMessageClickHandler = (): void => {
-    dispatch(actions.sendMessage({
-      ...message,
-      when: new Date().toISOString(),
-    }));
+    dispatch(
+      conversationsActions.sendMessage({
+        ...message,
+        when: new Date().toISOString(),
+      }),
+    );
     setMessage(initialMessageValue);
-  }
+  };
 
   const inputHelperText = (
     <span
       dangerouslySetInnerHTML={{
-        __html: marked.parseInline('*&ast;italic&ast;*&nbsp;&nbsp;**&ast;&ast;bold&ast;&ast;**&nbsp;&nbsp;')
+        __html: marked.parseInline('*&ast;italic&ast;*&nbsp;&nbsp;**&ast;&ast;bold&ast;&ast;**&nbsp;&nbsp;'),
       }}
     />
   );
 
-  const sendMessageButtonEnabled = (
-    (message.type === MessageTypes.MediaUnknown && message.file !== undefined) ||
-    (message.type === MessageTypes.Text && message.text !== '')
-  );
+  const sendMessageButtonEnabled =
+    (message.type === MessageTypes.File && message.file !== undefined) ||
+    (message.type === MessageTypes.Text && message.text !== '');
 
   return (
     <StyledMessageBarContainer>
       <StyledNewMessageContent>
-        <UploadDocument onChange={fileUploadChangeHandler} id="attach-file-input"/>
+        <UploadDocument onChange={fileUploadChangeHandler} id="attach-file-input" />
 
         <IconButton onClick={takePictureClickHandler}>
-          <CameraAltIcon/>
+          <CameraAltIcon />
         </IconButton>
 
         <StyledTextField
@@ -99,7 +103,7 @@ const MessageBar: React.FC = () => {
           disabled={!sendMessageButtonEnabled}
           aria-label="Send message"
         >
-          <SendIcon/>
+          <SendIcon />
         </StyledIconButton>
       </StyledNewMessageContent>
     </StyledMessageBarContainer>

@@ -18,7 +18,7 @@ jest.mock('react-redux', () => {
   return {
     ...reactReduxModule,
     useDispatch: jest.fn(),
-  }
+  };
 });
 
 describe('Message bar component', () => {
@@ -26,13 +26,13 @@ describe('Message bar component', () => {
     it('send document without message', () => {
       type DispatchedActionType = { payload: Message } & Action;
       const dispatchList: DispatchedActionType[] = [];
-      (useDispatch as jest.Mock) .mockImplementation(() => (action: DispatchedActionType) => dispatchList.push(action));
+      (useDispatch as jest.Mock).mockImplementation(() => (action: DispatchedActionType) => dispatchList.push(action));
 
       render(
         <AppProviders>
-          <MessageBar/>
+          <MessageBar />
         </AppProviders>,
-        { initialState: { session: { user: users.johnDoe } } }
+        { initialState: { session: { user: users.johnDoe } } },
       );
 
       // Select a file
@@ -49,20 +49,20 @@ describe('Message bar component', () => {
         actionType: ActionTypes.SendFile,
         documentName: 'filename.png',
         documentPath: 'http://localhost/filename.png',
-        initialMessage: ''
+        initialMessage: '',
       });
     });
 
     it('fill a text and then send document with message to action panel', () => {
       type DispatchedActionType = { payload: Message } & Action;
       const dispatchList: DispatchedActionType[] = [];
-      (useDispatch as jest.Mock) .mockImplementation(() => (action: DispatchedActionType) => dispatchList.push(action));
+      (useDispatch as jest.Mock).mockImplementation(() => (action: DispatchedActionType) => dispatchList.push(action));
 
       render(
         <AppProviders>
-          <MessageBar/>
+          <MessageBar />
         </AppProviders>,
-        { initialState: { session: { user: users.johnDoe } } }
+        { initialState: { session: { user: users.johnDoe } } },
       );
 
       // Enter message
@@ -83,7 +83,7 @@ describe('Message bar component', () => {
         actionType: ActionTypes.SendFile,
         documentName: 'filename.png',
         documentPath: 'http://localhost/filename.png',
-        initialMessage: 'Hello World!'
+        initialMessage: 'Hello World!',
       });
     });
   });
@@ -91,13 +91,13 @@ describe('Message bar component', () => {
   it('Send text message', () => {
     type DispatchedActionType = { payload: Message } & Action;
     const dispatchList: DispatchedActionType[] = [];
-    (useDispatch as jest.Mock) .mockImplementation(() => (action: DispatchedActionType) => dispatchList.push(action));
+    (useDispatch as jest.Mock).mockImplementation(() => (action: DispatchedActionType) => dispatchList.push(action));
 
     render(
       <AppProviders>
-        <MessageBar/>
+        <MessageBar />
       </AppProviders>,
-      { initialState: { session: { user: users.johnDoe } } }
+      { initialState: { session: { user: users.johnDoe } } },
     );
 
     // Enter message

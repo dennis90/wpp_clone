@@ -6,7 +6,8 @@ export interface StyledReceivedMessageProps extends React.HTMLAttributes<HTMLDiv
 }
 
 export const StyledReceivedMessage = styled.div<StyledReceivedMessageProps>`
-  background-color: ${({ kind, theme }: { theme: Theme } & StyledReceivedMessageProps) => kind === 'received' ? theme.palette.background.paper : theme.palette.primary.light};
+  background-color: ${({ kind, theme }: { theme: Theme } & StyledReceivedMessageProps) =>
+    kind === 'received' ? theme.palette.background.paper : theme.palette.primary.light};
   border-radius: 6px;
   border: 1px solid ${({ theme }: { theme: Theme }) => theme.palette.grey[200]};
   padding: 20px;
@@ -23,14 +24,14 @@ export interface StyledMessageContentProps extends React.HTMLAttributes<HTMLDivE
 
 export const StyledMessageContent = styled.div<StyledMessageContentProps>`
   display: flex;
-  margin: ${({ kind }: StyledMessageContentProps) => kind === 'received' ? '20px' : '20px 20px 20px auto'};
-  justify-content: ${({ kind }: StyledMessageContentProps) => kind === 'received' ? 'flex-start' : 'flex-end'};
+  margin: ${({ kind }: StyledMessageContentProps) => (kind === 'received' ? '20px' : '20px 20px 20px auto')};
+  justify-content: ${({ kind }: StyledMessageContentProps) => (kind === 'received' ? 'flex-start' : 'flex-end')};
   width: 60%;
 `;
 
 export const StyledDate = styled.p`
   text-align: right;
-  font-size: .7rem;
+  font-size: 0.7rem;
   color: ${({ theme }: { theme: Theme }) => theme.palette.text.secondary};
 `;
 
@@ -40,7 +41,7 @@ export const StyledActionsContainer = styled.div`
   flex-wrap: wrap;
 
   button {
-    font-size: .7rem;
+    font-size: 0.7rem;
     margin-bottom: 10px;
     min-width: 80px;
   }

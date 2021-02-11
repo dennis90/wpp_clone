@@ -1,4 +1,4 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit'
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
 import actionPanelSlice from './actionPanel';
 import conversationsSlice from './conversations';

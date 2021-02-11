@@ -15,7 +15,7 @@ jest.mock('react-redux', () => {
   return {
     ...reactReduxModule,
     useDispatch: jest.fn(),
-  }
+  };
 });
 
 describe('SendFile Component', () => {
@@ -30,14 +30,14 @@ describe('SendFile Component', () => {
 
     render(
       <AppProviders>
-        <SendFile/>
+        <SendFile />
       </AppProviders>,
       {
         initialState: {
           actionPanel: { panelInfo: actionPanelInitialState },
-          conversations: { selectedConversationId: '100', conversations: [], },
+          conversations: { selectedConversationId: '100', conversations: [] },
         },
-      }
+      },
     );
 
     const textInput = screen.getByPlaceholderText('Informe a legenda da imagem') as HTMLInputElement;
@@ -55,14 +55,14 @@ describe('SendFile Component', () => {
 
     render(
       <AppProviders>
-        <SendFile/>
+        <SendFile />
       </AppProviders>,
       {
         initialState: {
           actionPanel: { panelInfo: actionPanelInitialState },
-          conversations: { selectedConversationId: '100', conversations: [], },
+          conversations: { selectedConversationId: '100', conversations: [] },
         },
-      }
+      },
     );
 
     expect(screen.getByLabelText('Attachment icon')).toBeInTheDocument();
@@ -72,7 +72,7 @@ describe('SendFile Component', () => {
   it('send file without message', () => {
     type DispatchedActionType = { payload: unknown } & Action;
     const dispatchList: DispatchedActionType[] = [];
-    (useDispatch as jest.Mock) .mockImplementation(() => (action: DispatchedActionType) => dispatchList.push(action));
+    (useDispatch as jest.Mock).mockImplementation(() => (action: DispatchedActionType) => dispatchList.push(action));
 
     const actionPanelInitialState: StoreState['actionPanel']['panelInfo'] = {
       actionType: ActionTypes.SendFile,
@@ -84,15 +84,15 @@ describe('SendFile Component', () => {
 
     render(
       <AppProviders>
-        <SendFile/>
+        <SendFile />
       </AppProviders>,
       {
         initialState: {
           actionPanel: { panelInfo: actionPanelInitialState },
-          conversations: { selectedConversationId: '100', conversations: [], },
+          conversations: { selectedConversationId: '100', conversations: [] },
           session: { user: users.johnDoe },
         },
-      }
+      },
     );
 
     expect(screen.getByLabelText('Attachment icon')).toBeInTheDocument();
@@ -123,7 +123,7 @@ describe('SendFile Component', () => {
   it('send document with message', () => {
     type DispatchedActionType = { payload: unknown } & Action;
     const dispatchList: DispatchedActionType[] = [];
-    (useDispatch as jest.Mock) .mockImplementation(() => (action: DispatchedActionType) => dispatchList.push(action));
+    (useDispatch as jest.Mock).mockImplementation(() => (action: DispatchedActionType) => dispatchList.push(action));
 
     const actionPanelInitialState: StoreState['actionPanel']['panelInfo'] = {
       actionType: ActionTypes.SendFile,
@@ -135,14 +135,14 @@ describe('SendFile Component', () => {
 
     render(
       <AppProviders>
-        <SendFile/>
+        <SendFile />
       </AppProviders>,
       {
         initialState: {
           actionPanel: { panelInfo: actionPanelInitialState },
-          conversations: { selectedConversationId: '100', conversations: [], },
+          conversations: { selectedConversationId: '100', conversations: [] },
         },
-      }
+      },
     );
 
     const messageInput = screen.getByPlaceholderText('Informe a legenda da imagem') as HTMLInputElement;
@@ -173,7 +173,7 @@ describe('SendFile Component', () => {
   it('close panel after message is sent', () => {
     type DispatchedActionType = { payload: unknown } & Action;
     const dispatchList: DispatchedActionType[] = [];
-    (useDispatch as jest.Mock) .mockImplementation(() => (action: DispatchedActionType) => dispatchList.push(action));
+    (useDispatch as jest.Mock).mockImplementation(() => (action: DispatchedActionType) => dispatchList.push(action));
 
     const actionPanelInitialState: StoreState['actionPanel']['panelInfo'] = {
       actionType: ActionTypes.SendFile,
@@ -185,14 +185,14 @@ describe('SendFile Component', () => {
 
     render(
       <AppProviders>
-        <SendFile/>
+        <SendFile />
       </AppProviders>,
       {
         initialState: {
           actionPanel: { panelInfo: actionPanelInitialState },
-          conversations: { selectedConversationId: '100', conversations: [], },
+          conversations: { selectedConversationId: '100', conversations: [] },
         },
-      }
+      },
     );
 
     const messageInput = screen.getByPlaceholderText('Informe a legenda da imagem') as HTMLInputElement;

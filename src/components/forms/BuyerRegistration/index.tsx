@@ -1,6 +1,6 @@
 import { KeyboardDatePicker, KeyboardDatePickerProps } from '@material-ui/pickers';
 import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel'
+import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import SelectField from '@material-ui/core/Select';
@@ -31,38 +31,28 @@ const BuyerRegistration: React.FC = () => {
   const onSubmit = (data: FormFields): void => {
     console.log(data);
 
-    dispatch(conversationsActions.sendMessage({
-      actions: [],
-      type: MessageTypes.GreetingFromBuyer,
-      userId: appUser?.id || '',
-      when: new Date().toISOString(),
-      read: true,
-      form: data,
-    }));
+    dispatch(
+      conversationsActions.sendMessage({
+        actions: [],
+        type: MessageTypes.GreetingFromBuyer,
+        userId: appUser?.id || '',
+        when: new Date().toISOString(),
+        read: true,
+        form: data,
+      }),
+    );
 
     dispatch(actionPanelActions.setPanelInfo(undefined));
   };
 
   return (
     <>
-      <ActionModalHeader>
-        Registrar usuário
-      </ActionModalHeader>
+      <ActionModalHeader>Registrar usuário</ActionModalHeader>
 
       <StyledForm onSubmit={handleSubmit(onSubmit)}>
-        <input
-          type="hidden"
-          value={selectedConversationId}
-          name="chat_id"
-          ref={register}
-        />
+        <input type="hidden" value={selectedConversationId} name="chat_id" ref={register} />
 
-        <input
-          type="hidden"
-          value="fazer_meu_cadastro"
-          name="form"
-          ref={register}
-        />
+        <input type="hidden" value="fazer_meu_cadastro" name="form" ref={register} />
 
         <StyledFieldsRow>
           <FormControl>
@@ -88,21 +78,13 @@ const BuyerRegistration: React.FC = () => {
                   <MenuItem value="">
                     <em>Nenhuma</em>
                   </MenuItem>
-                  <MenuItem value={Citizenship.Brazilian}>
-                    Brasileira
-                  </MenuItem>
-                  <MenuItem value={Citizenship.Other}>
-                    Outra
-                  </MenuItem>
+                  <MenuItem value={Citizenship.Brazilian}>Brasileira</MenuItem>
+                  <MenuItem value={Citizenship.Other}>Outra</MenuItem>
                 </SelectField>
               }
             />
 
-            {!!errors.citizenship &&
-              <FormHelperText error={true}>
-                {errors.citizenship.message}
-              </FormHelperText>
-            }
+            {!!errors.citizenship && <FormHelperText error={true}>{errors.citizenship.message}</FormHelperText>}
           </FormControl>
         </StyledFieldsRow>
 
@@ -112,7 +94,7 @@ const BuyerRegistration: React.FC = () => {
             name="fullname"
             id="fullname"
             inputProps={{
-              ref: register({ required: 'Campo obrigatório' })
+              ref: register({ required: 'Campo obrigatório' }),
             }}
             error={!!errors.fullname}
             helperText={errors.fullname && errors.fullname.message}
@@ -164,11 +146,7 @@ const BuyerRegistration: React.FC = () => {
               }
             />
 
-            {!!errors.gender &&
-              <FormHelperText error={true}>
-                {errors.gender.message}
-              </FormHelperText>
-            }
+            {!!errors.gender && <FormHelperText error={true}>{errors.gender.message}</FormHelperText>}
           </FormControl>
 
           <FormControl>
@@ -201,11 +179,7 @@ const BuyerRegistration: React.FC = () => {
               }
             />
 
-            {!!errors.civil_status &&
-              <FormHelperText error={true}>
-                {errors.civil_status.message}
-              </FormHelperText>
-            }
+            {!!errors.civil_status && <FormHelperText error={true}>{errors.civil_status.message}</FormHelperText>}
           </FormControl>
         </StyledFieldsRow>
 
@@ -215,7 +189,7 @@ const BuyerRegistration: React.FC = () => {
             name="mother_fullname"
             id="mother_fullname"
             inputProps={{
-              ref: register({ required: 'Campo obrigatório' })
+              ref: register({ required: 'Campo obrigatório' }),
             }}
             error={!!errors.mother_fullname}
             helperText={errors.mother_fullname && errors.mother_fullname.message}
@@ -228,7 +202,7 @@ const BuyerRegistration: React.FC = () => {
             name="father_fullname"
             id="father_fullname"
             inputProps={{
-              ref: register
+              ref: register,
             }}
           />
         </StyledFieldsRow>
@@ -241,7 +215,7 @@ const BuyerRegistration: React.FC = () => {
             error={!!errors.birth_country}
             helperText={errors.birth_country && errors.birth_country.message}
             inputProps={{
-              ref: register({ required: 'Campo obrigatório' })
+              ref: register({ required: 'Campo obrigatório' }),
             }}
           />
 
@@ -252,7 +226,7 @@ const BuyerRegistration: React.FC = () => {
             error={!!errors.birth_state}
             helperText={errors.birth_state && errors.birth_state.message}
             inputProps={{
-              ref: register({ required: 'Campo obrigatório' })
+              ref: register({ required: 'Campo obrigatório' }),
             }}
           />
 
@@ -263,14 +237,13 @@ const BuyerRegistration: React.FC = () => {
             error={!!errors.birth_city}
             helperText={errors.birth_city && errors.birth_city.message}
             inputProps={{
-              ref: register({ required: 'Campo obrigatório' })
+              ref: register({ required: 'Campo obrigatório' }),
             }}
           />
-
         </StyledFieldsRow>
 
         <StyledButton type="submit">
-          <SaveIcon fontSize="large"/>
+          <SaveIcon fontSize="large" />
           Salvar
         </StyledButton>
       </StyledForm>

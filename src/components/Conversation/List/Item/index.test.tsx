@@ -18,7 +18,7 @@ const message: Message = {
   userId: '1001',
   actions: [],
   type: MessageTypes.Text,
-  text: 'Hello World!'
+  text: 'Hello World!',
 };
 
 const conversation: Conversation = {
@@ -37,8 +37,8 @@ describe('Conversation listing Item component', () => {
 
     render(
       <AppProviders>
-        <Item conversation={localConversation} active={false}/>
-      </AppProviders>
+        <Item conversation={localConversation} active={false} />
+      </AppProviders>,
     );
 
     expect(screen.getByText(format(new Date(localMessage.when), 'p'))).toBeInTheDocument();
@@ -50,8 +50,8 @@ describe('Conversation listing Item component', () => {
 
     render(
       <AppProviders>
-        <Item conversation={localConversation} active={false}/>
-      </AppProviders>
+        <Item conversation={localConversation} active={false} />
+      </AppProviders>,
     );
 
     expect(screen.getByText(format(new Date(localMessage.when), 'P'))).toBeInTheDocument();
@@ -62,8 +62,8 @@ describe('Conversation listing Item component', () => {
 
     render(
       <AppProviders>
-        <Item conversation={localConversation} active={false}/>
-      </AppProviders>
+        <Item conversation={localConversation} active={false} />
+      </AppProviders>,
     );
 
     expect(screen.getByText(localConversation.title)).toBeInTheDocument();
@@ -78,8 +78,8 @@ describe('Conversation listing Item component', () => {
 
     render(
       <AppProviders>
-        <Item conversation={localConversation} active={false}/>
-      </AppProviders>
+        <Item conversation={localConversation} active={false} />
+      </AppProviders>,
     );
 
     const image = screen.getByAltText(localConversation.title) as HTMLImageElement;
@@ -94,8 +94,8 @@ describe('Conversation listing Item component', () => {
 
     render(
       <AppProviders>
-        <Item conversation={localConversation} active={false}/>
-      </AppProviders>
+        <Item conversation={localConversation} active={false} />
+      </AppProviders>,
     );
 
     const badge = screen.getByText('1');
@@ -109,8 +109,8 @@ describe('Conversation listing Item component', () => {
 
     render(
       <AppProviders>
-        <Item conversation={localConversation} active={false}/>
-      </AppProviders>
+        <Item conversation={localConversation} active={false} />
+      </AppProviders>,
     );
 
     expect(screen.getByText(localMessage.text)).toBeInTheDocument();
@@ -122,21 +122,23 @@ describe('Conversation listing Item component', () => {
     type DispatchedActionType = { payload: unknown } & Action;
     const dispatchList: DispatchedActionType[] = [];
 
-    (useDispatch as jest.Mock) .mockImplementation(() => (action: DispatchedActionType) => dispatchList.push(action));
+    (useDispatch as jest.Mock).mockImplementation(() => (action: DispatchedActionType) => dispatchList.push(action));
 
     render(
       <AppProviders>
-        <Item conversation={localConversation} active={false}/>
-      </AppProviders>
+        <Item conversation={localConversation} active={false} />
+      </AppProviders>,
     );
 
     const element = screen.getByText(localConversation.title);
 
     fireEvent.click(element);
 
-    expect(dispatchList).toEqual([{
-      payload: localConversation.id,
-      type: 'conversations/selectConversationId'
-    }]);
+    expect(dispatchList).toEqual([
+      {
+        payload: localConversation.id,
+        type: 'conversations/selectConversationId',
+      },
+    ]);
   });
 });

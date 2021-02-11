@@ -13,16 +13,16 @@ const UnknownMedia: React.FC<UnknownMediaProps> = ({ downloadable = false, file 
   return (
     <StyledMediaContent>
       <StyledIconContainer>
-        <AttachFileIcon aria-label="Attachment icon" fontSize="inherit"/>
+        <AttachFileIcon aria-label="Attachment icon" fontSize="inherit" />
       </StyledIconContainer>
 
       {!downloadable && <span>{file.name}</span>}
 
-      {downloadable &&
+      {downloadable && (
         <a href={file.path} download={file.name}>
           {file.name}
         </a>
-      }
+      )}
     </StyledMediaContent>
   );
 };

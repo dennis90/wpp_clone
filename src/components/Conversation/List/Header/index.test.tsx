@@ -13,7 +13,7 @@ describe('Conversation listing Header component', () => {
   it('display Avatar image', () => {
     render(
       <AppProviders>
-        <Header/>
+        <Header />
       </AppProviders>,
       { initialState: { session: { user: mockedUser } } },
     );
@@ -22,13 +22,12 @@ describe('Conversation listing Header component', () => {
 
     expect(image).toBeInTheDocument();
     expect(image.src).toContain(mockedUser.profilePicture);
-
   });
 
   it('display user name', () => {
     render(
       <AppProviders>
-        <Header/>
+        <Header />
       </AppProviders>,
       { initialState: { session: { user: mockedUser } } },
     );

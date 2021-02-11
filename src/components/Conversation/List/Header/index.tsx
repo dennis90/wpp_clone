@@ -10,10 +10,8 @@ const ListHeader: React.FC = () => {
 
   return (
     <StyledUserHeader>
-      <Avatar src={appUser?.profilePicture} alt={appUser?.name}/>
-      <StyledUserName>
-        {appUser?.name}
-      </StyledUserName>
+      <Avatar src={appUser?.profilePicture} alt={appUser?.name} />
+      <StyledUserName>{appUser?.name}</StyledUserName>
     </StyledUserHeader>
   );
 };

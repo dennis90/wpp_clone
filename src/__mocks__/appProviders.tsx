@@ -6,12 +6,9 @@ import { ThemeProvider } from 'styled-components';
 const theme = createMuiTheme();
 
 const AppMockProviders: React.FC = (props) => {
-
   return (
     <ThemeProvider theme={theme}>
-      <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        {props.children}
-      </MuiPickersUtilsProvider>
+      <MuiPickersUtilsProvider utils={DateFnsUtils}>{props.children}</MuiPickersUtilsProvider>
     </ThemeProvider>
   );
 };

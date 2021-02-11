@@ -4,17 +4,17 @@ import { render, screen } from 'test-utils';
 
 import ConversationContainer from './index';
 
-jest.mock('./ActiveConversation', () => () => <div data-testid="active-conversation"/>);
-jest.mock('./EmptyPlaceholder', () => () => <div data-testid="empty-placeholder"/>);
+jest.mock('./ActiveConversation', () => () => <div data-testid="active-conversation" />);
+jest.mock('./EmptyPlaceholder', () => () => <div data-testid="empty-placeholder" />);
 
 describe('Conversation container component', () => {
   it('Render empty placeholder when no conversation is selected', async () => {
     render(
       <AppProviders>
-        <ConversationContainer/>
+        <ConversationContainer />
       </AppProviders>,
       {
-        initialState: { conversations: { conversations, selectedConversationId: undefined } }
+        initialState: { conversations: { conversations, selectedConversationId: undefined } },
       },
     );
 
@@ -24,10 +24,10 @@ describe('Conversation container component', () => {
   it('Render active conversation when a conversation is selected', async () => {
     render(
       <AppProviders>
-        <ConversationContainer/>
+        <ConversationContainer />
       </AppProviders>,
       {
-        initialState: { conversations: { conversations, selectedConversationId: conversations[0].id } }
+        initialState: { conversations: { conversations, selectedConversationId: conversations[0].id } },
       },
     );
 

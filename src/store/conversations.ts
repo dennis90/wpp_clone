@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { Conversation, Message } from 'types/Conversation';
 
@@ -29,8 +29,8 @@ export const conversationsSlice = createSlice({
 
     appendConversation: (state, action: PayloadAction<Conversation>) => {
       state.conversations = [action.payload, ...state.conversations];
-    }
-  }
+    },
+  },
 });
 
 export const actions = conversationsSlice.actions;

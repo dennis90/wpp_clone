@@ -14,18 +14,18 @@ jest.mock('react-redux', () => {
   return {
     ...reactReduxModule,
     useDispatch: jest.fn(),
-  }
+  };
 });
 
 describe('BuyersRegistration Component', () => {
   test('form filled and submit', async () => {
     type DispatchedActionType = { payload: unknown } & Action;
     const dispatchList: DispatchedActionType[] = [];
-    (useDispatch as jest.Mock) .mockImplementation(() => (action: DispatchedActionType) => dispatchList.push(action));
+    (useDispatch as jest.Mock).mockImplementation(() => (action: DispatchedActionType) => dispatchList.push(action));
 
     render(
       <AppProviders>
-        <BuyerRegistration/>
+        <BuyerRegistration />
       </AppProviders>,
       {
         initialState: {
@@ -37,57 +37,57 @@ describe('BuyersRegistration Component', () => {
             user: users.johnDoe,
           },
         },
-      }
+      },
     );
 
-    const citizenship = screen.getByRole('button', { name: 'Nacionalidade ​'});
-    fireEvent.mouseDown(citizenship)
+    const citizenship = screen.getByRole('button', { name: 'Nacionalidade ​' });
+    fireEvent.mouseDown(citizenship);
     const citizenshipOption = screen.getByRole('option', { name: 'Brasileira' });
     citizenshipOption.click();
-    getByText(citizenship, 'Brasileira')
+    getByText(citizenship, 'Brasileira');
     expect(getByText(citizenship, 'Brasileira')).toBeInTheDocument();
 
     const fullname = screen.getByRole('textbox', { name: 'Nome completo' }) as HTMLInputElement;
-    fireEvent.change(fullname, { target: { value: 'John Doe' }});
+    fireEvent.change(fullname, { target: { value: 'John Doe' } });
     expect(fullname.value).toBe('John Doe');
 
     const birthDate = screen.getByLabelText('Data de Nascimento') as HTMLInputElement;
-    fireEvent.change(birthDate, { target: { value: '09/12/1999' }});
+    fireEvent.change(birthDate, { target: { value: '09/12/1999' } });
     expect(birthDate.value).toBe('09/12/1999');
 
-    const gender = screen.getByRole('button', { name: 'Gênero ​'});
-    fireEvent.mouseDown(gender)
+    const gender = screen.getByRole('button', { name: 'Gênero ​' });
+    fireEvent.mouseDown(gender);
     const genderOption = screen.getByRole('option', { name: 'Feminino' });
     genderOption.click();
     expect(getByText(gender, 'Feminino')).toBeInTheDocument();
 
-    const civilStatus = screen.getByRole('button', { name: 'Estado civil ​'});
-    fireEvent.mouseDown(civilStatus)
+    const civilStatus = screen.getByRole('button', { name: 'Estado civil ​' });
+    fireEvent.mouseDown(civilStatus);
     const civilStatusOption = screen.getByRole('option', { name: 'Casado' });
     civilStatusOption.click();
     expect(getByText(civilStatus, 'Casado')).toBeInTheDocument();
 
     const mother_fullname = screen.getByRole('textbox', { name: 'Nome da mãe' }) as HTMLInputElement;
-    fireEvent.change(mother_fullname, { target: { value: 'Joan Doe' }});
+    fireEvent.change(mother_fullname, { target: { value: 'Joan Doe' } });
     expect(mother_fullname.value).toBe('Joan Doe');
 
     const father_fullname = screen.getByRole('textbox', { name: 'Nome do pai' }) as HTMLInputElement;
-    fireEvent.change(father_fullname, { target: { value: 'John Doe Sr' }});
+    fireEvent.change(father_fullname, { target: { value: 'John Doe Sr' } });
     expect(father_fullname.value).toBe('John Doe Sr');
 
     const birth_country = screen.getByRole('textbox', { name: 'Local de nascimento' }) as HTMLInputElement;
-    fireEvent.change(birth_country, { target: { value: 'Brazil' }});
+    fireEvent.change(birth_country, { target: { value: 'Brazil' } });
     expect(birth_country.value).toBe('Brazil');
 
     const birth_state = screen.getByRole('textbox', { name: 'Estado' }) as HTMLInputElement;
-    fireEvent.change(birth_state, { target: { value: 'São Paulo' }});
+    fireEvent.change(birth_state, { target: { value: 'São Paulo' } });
     expect(birth_state.value).toBe('São Paulo');
 
     const birth_city = screen.getByRole('textbox', { name: 'Cidade' }) as HTMLInputElement;
-    fireEvent.change(birth_city, { target: { value: 'São Paulo' }});
+    fireEvent.change(birth_city, { target: { value: 'São Paulo' } });
     expect(birth_city.value).toBe('São Paulo');
 
-    await waitFor(() => fireEvent.click(screen.getByRole('button', { name: /salvar/i })))
+    await waitFor(() => fireEvent.click(screen.getByRole('button', { name: /salvar/i })));
 
     expect(dispatchList).toHaveLength(2);
 
@@ -119,4 +119,4 @@ describe('BuyersRegistration Component', () => {
     expect(dispatchList[1].type).toBe('actionPanel/setPanelInfo');
     expect(dispatchList[1].payload).toEqual(undefined);
   });
-})
+});

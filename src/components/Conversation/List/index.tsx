@@ -11,15 +11,15 @@ const ConversationList: React.FC = () => {
 
   return (
     <StyledContainer>
-      <Header/>
+      <Header />
 
-      {conversations.map((conversation) =>
+      {conversations.map((conversation) => (
         <ConversationItem
           key={conversation.id}
           active={conversation.id === selectedConversationId}
           conversation={conversation}
-        />,
-      )}
+        />
+      ))}
     </StyledContainer>
   );
 };

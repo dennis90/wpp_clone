@@ -6,7 +6,7 @@ import UploadDocument from './index';
 describe('UploadDocument Component', () => {
   it('trigger on change attribute', async () => {
     const fileChangeHandler = jest.fn();
-    render(<UploadDocument id="upload-content" onChange={fileChangeHandler}/>);
+    render(<UploadDocument id="upload-content" onChange={fileChangeHandler} />);
     const input = screen.getByLabelText('upload file input');
 
     expect(input).toBeInTheDocument();

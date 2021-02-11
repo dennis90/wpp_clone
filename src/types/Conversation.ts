@@ -30,7 +30,9 @@ export const messageTypeAvailableActions: Record<MessageTypes, ActionTypes[]> = 
   [MessageTypes.GreetingFromBuyer]: [ActionTypes.Approve, ActionTypes.Reject, ActionTypes.BuyerInfo],
   [MessageTypes.GreetingFromSeller]: [ActionTypes.Register, ActionTypes.SellerInfo],
   [MessageTypes.ValidateDocuments]: [
-    ActionTypes.ValidateDriversLicense, ActionTypes.ValidateCredit, ActionTypes.ValidateCriminalRecord
+    ActionTypes.ValidateDriversLicense,
+    ActionTypes.ValidateCredit,
+    ActionTypes.ValidateCriminalRecord,
   ],
   [MessageTypes.File]: [],
   [MessageTypes.Text]: [],

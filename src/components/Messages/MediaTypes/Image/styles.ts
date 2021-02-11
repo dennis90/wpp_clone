@@ -23,7 +23,6 @@ export const StyledIconContainer = styled.div`
   text-align: center;
 `;
 
-
 export const StyledImage = styled.img`
   width: 100%;
 `;

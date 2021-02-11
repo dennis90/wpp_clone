@@ -13,12 +13,10 @@ const MessageExtraField: React.FC<MessageExtraFieldProps> = (props) => {
   return (
     <StyledExtraFieldsContent>
       <StyledExtraFieldsHeader>
-        <span>
-          {props.title}
-        </span>
+        <span>{props.title}</span>
 
         <IconButton size="small" onClick={props.onCancel} aria-label="close button">
-          <CloseIcon/>
+          <CloseIcon />
         </IconButton>
       </StyledExtraFieldsHeader>
 

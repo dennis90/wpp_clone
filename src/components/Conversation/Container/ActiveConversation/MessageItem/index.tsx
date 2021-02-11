@@ -12,7 +12,13 @@ import MediaTypeUnknown from 'components/Messages/MediaTypes/Unknown';
 import { StoreState } from 'store';
 import { actions as actionPanelActions } from 'store/actionPanel';
 import { ActionTypes, Message, MessageTypes, User } from 'types/Conversation';
-import { StyledActionsContainer, StyledAvatarContainer, StyledDate, StyledMessageContent, StyledReceivedMessage } from './styles';
+import {
+  StyledActionsContainer,
+  StyledAvatarContainer,
+  StyledDate,
+  StyledMessageContent,
+  StyledReceivedMessage,
+} from './styles';
 import { formTypeGreeting } from 'types/Forms';
 import { isDate } from 'date-fns';
 
@@ -38,17 +44,19 @@ const MessageItem: React.FC<MessageItemProps> = ({ message, conversationUsers: u
 
     type FormKeys = keyof typeof formFields;
 
-    messageContent += (Object.keys(formFields) as FormKeys[]).map((key) => {
-      if (typeof formFields[key] === 'string') {
-        return `${key}: ${formFields[key]}`;
-      }
+    messageContent += (Object.keys(formFields) as FormKeys[])
+      .map((key) => {
+        if (typeof formFields[key] === 'string') {
+          return `${key}: ${formFields[key]}`;
+        }
 
-      if (isDate(formFields[key])) {
-        return `${key}: ${format(new Date(formFields[key]), 'P')}`
-      }
+        if (isDate(formFields[key])) {
+          return `${key}: ${format(new Date(formFields[key]), 'P')}`;
+        }
 
-      return `${key}: ${String(formFields[key])}`;
-    }).join('\n');
+        return `${key}: ${String(formFields[key])}`;
+      })
+      .join('\n');
   }
 
   const actionDispatchHandler = (actionType: ActionTypes): void => {
@@ -59,34 +67,31 @@ const MessageItem: React.FC<MessageItemProps> = ({ message, conversationUsers: u
 
   return (
     <StyledMessageContent kind={sent ? 'sent' : 'received'}>
-      {messageFrom && !sent &&
+      {messageFrom && !sent && (
         <StyledAvatarContainer>
-          <Avatar src={messageFrom.profilePicture} alt={messageFrom.name}/>
+          <Avatar src={messageFrom.profilePicture} alt={messageFrom.name} />
           {messageFrom.name}
         </StyledAvatarContainer>
-      }
+      )}
 
       <div>
-        {(messageContent || message.file) &&
+        {(messageContent || message.file) && (
           <StyledReceivedMessage kind={sent ? 'sent' : 'received'}>
-            {message.file && message.type === MessageTypes.File &&
+            {message.file && message.type === MessageTypes.File && (
               <>
-              {message.file.type.startsWith('image')
-                ? <MediaTypeImage file={message.file} downloadable={true}/>
-                :<MediaTypeUnknown file={message.file} downloadable={true}/>
-              }
+                {message.file.type.startsWith('image') ? (
+                  <MediaTypeImage file={message.file} downloadable={true} />
+                ) : (
+                  <MediaTypeUnknown file={message.file} downloadable={true} />
+                )}
               </>
-            }
+            )}
 
-            {messageContent &&
-              <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(marked(messageContent)) }}/>
-            }
+            {messageContent && <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(marked(messageContent)) }} />}
 
-            <StyledDate>
-              {isToday(messageDate) ? format(messageDate, 'p') : format(messageDate, 'Pp')}
-            </StyledDate>
+            <StyledDate>{isToday(messageDate) ? format(messageDate, 'p') : format(messageDate, 'Pp')}</StyledDate>
           </StyledReceivedMessage>
-        }
+        )}
 
         <StyledActionsContainer>
           {message.actions.map((action) => (

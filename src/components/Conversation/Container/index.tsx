@@ -14,10 +14,10 @@ const ConversationContainer: React.FC = () => {
 
   return (
     <StyledContainer>
-      {!selectedConversation && <EmptyPlaceholder/>}
-      {selectedConversation && <ActiveConversation conversation={selectedConversation}/>}
+      {!selectedConversation && <EmptyPlaceholder />}
+      {selectedConversation && <ActiveConversation conversation={selectedConversation} />}
     </StyledContainer>
   );
-}
+};
 
 export default ConversationContainer;

@@ -13,15 +13,15 @@ jest.mock('react-redux', () => {
   return {
     ...reactReduxModule,
     useDispatch: jest.fn(),
-  }
+  };
 });
 
 describe('SendPhoto component', () => {
   test('User take photo', () => {
     render(
       <AppMockProviders>
-        <SendPhotoComponent/>
-      </AppMockProviders>
+        <SendPhotoComponent />
+      </AppMockProviders>,
     );
 
     const takePictureButton = screen.getByText('Tirar foto') as HTMLButtonElement;
@@ -32,8 +32,8 @@ describe('SendPhoto component', () => {
   test('User retake the photo', () => {
     render(
       <AppMockProviders>
-        <SendPhotoComponent/>
-      </AppMockProviders>
+        <SendPhotoComponent />
+      </AppMockProviders>,
     );
 
     const takePictureButton = screen.getByText('Tirar foto') as HTMLButtonElement;
@@ -46,18 +46,16 @@ describe('SendPhoto component', () => {
   });
 
   test('User pass the photo to another send component', () => {
-    jest
-      .useFakeTimers('modern')
-      .setSystemTime(new Date('2021-02-10').getTime());
+    jest.useFakeTimers('modern').setSystemTime(new Date('2021-02-10').getTime());
 
     type DispatchedActionType = { payload: unknown } & Action;
     const dispatchList: DispatchedActionType[] = [];
-    (useDispatch as jest.Mock) .mockImplementation(() => (action: DispatchedActionType) => dispatchList.push(action));
+    (useDispatch as jest.Mock).mockImplementation(() => (action: DispatchedActionType) => dispatchList.push(action));
 
     render(
       <AppMockProviders>
-        <SendPhotoComponent/>
-      </AppMockProviders>
+        <SendPhotoComponent />
+      </AppMockProviders>,
     );
 
     const takePictureButton = screen.getByText('Tirar foto') as HTMLButtonElement;
@@ -75,8 +73,7 @@ describe('SendPhoto component', () => {
       documentName: 'photo_2021-02-10T00:00:00.000Z.png',
       documentPath: 'image/png-data-url',
       documentType: 'image/png',
-      initialMessage: ''
+      initialMessage: '',
     });
   });
-
 });

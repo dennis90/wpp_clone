@@ -19,7 +19,9 @@ const SendFile: React.FC = () => {
   const appUser = useSelector((store: StoreState) => store.session.user);
 
   const dispatch = useDispatch();
-  const [messageText, setMessageText] = useState<string>(panelInfo?.actionType === ActionTypes.SendFile ? panelInfo.initialMessage : '');
+  const [messageText, setMessageText] = useState<string>(
+    panelInfo?.actionType === ActionTypes.SendFile ? panelInfo.initialMessage : '',
+  );
 
   if (panelInfo?.actionType !== ActionTypes.SendFile || selectedConversationId === undefined) {
     return null;
@@ -30,22 +32,24 @@ const SendFile: React.FC = () => {
   };
 
   const sendMessageClickHandler = (): void => {
-    dispatch(conversationActions.sendMessage({
-      actions: [],
-      type: MessageTypes.File,
-      userId: appUser?.id ?? '',
-      when: new Date().toISOString(),
-      file: {
-        name: panelInfo.documentName,
-        path: panelInfo.documentPath,
-        type: panelInfo.documentType,
-      },
-      read: true,
-      text: messageText,
-    }));
+    dispatch(
+      conversationActions.sendMessage({
+        actions: [],
+        type: MessageTypes.File,
+        userId: appUser?.id ?? '',
+        when: new Date().toISOString(),
+        file: {
+          name: panelInfo.documentName,
+          path: panelInfo.documentPath,
+          type: panelInfo.documentType,
+        },
+        read: true,
+        text: messageText,
+      }),
+    );
 
     dispatch(actionPanelActions.setPanelInfo(undefined));
-  }
+  };
 
   const file = {
     name: panelInfo.documentName,
@@ -55,15 +59,14 @@ const SendFile: React.FC = () => {
 
   return (
     <StyledPanelContainer>
-      <ActionModalHeader>
-        Adicionar legenda
-      </ActionModalHeader>
+      <ActionModalHeader>Adicionar legenda</ActionModalHeader>
 
       <StyledPanelContent>
-        {panelInfo.documentType.startsWith('image')
-          ? <MediaTypeImage file={file} downloadable={false}/>
-          : <MediaTypeUnknown file={file} downloadable={false}/>
-        }
+        {panelInfo.documentType.startsWith('image') ? (
+          <MediaTypeImage file={file} downloadable={false} />
+        ) : (
+          <MediaTypeUnknown file={file} downloadable={false} />
+        )}
       </StyledPanelContent>
 
       <StyledPanelFooter>
@@ -75,11 +78,8 @@ const SendFile: React.FC = () => {
           aria-label="Image label"
         />
 
-        <IconButton
-          aria-label="Send message"
-          onClick={sendMessageClickHandler}
-        >
-          <SendIcon/>
+        <IconButton aria-label="Send message" onClick={sendMessageClickHandler}>
+          <SendIcon />
         </IconButton>
       </StyledPanelFooter>
     </StyledPanelContainer>

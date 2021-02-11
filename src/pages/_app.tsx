@@ -32,14 +32,13 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => (
       <MuiThemeProvider theme={theme}>
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <ReduxProvider store={store}>
-            <GlobalStyle/>
+            <GlobalStyle />
             <Component {...pageProps} />
           </ReduxProvider>
         </MuiPickersUtilsProvider>
       </MuiThemeProvider>
     </ThemeProvider>
-
   </>
 );
 
-export default MyApp
+export default MyApp;

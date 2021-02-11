@@ -5,9 +5,7 @@ const EmptyPlaceholder: React.FC = () => {
     <div>
       <div>
         <h2>Nenhuma conversa selecionada</h2>
-        <p>
-          Selecione uma conversa para começar a negociar!
-        </p>
+        <p>Selecione uma conversa para começar a negociar!</p>
       </div>
     </div>
   );

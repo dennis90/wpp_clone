@@ -9,11 +9,11 @@ const mockFile = {
 };
 
 describe('UnknownMediaType component', () => {
-  it('Display icon and file name if component isn\'t downloadable', () => {
+  it("Display icon and file name if component isn't downloadable", () => {
     render(
       <AppProviders>
-        <UnknownMediaType file={mockFile} downloadable={false}/>
-      </AppProviders>
+        <UnknownMediaType file={mockFile} downloadable={false} />
+      </AppProviders>,
     );
 
     expect(screen.getByLabelText('Attachment icon')).toBeInTheDocument();
@@ -24,12 +24,12 @@ describe('UnknownMediaType component', () => {
   it('Display icon and file download link if component is downloadable', () => {
     render(
       <AppProviders>
-        <UnknownMediaType file={mockFile} downloadable={true}/>
-      </AppProviders>
+        <UnknownMediaType file={mockFile} downloadable={true} />
+      </AppProviders>,
     );
     expect(screen.getByLabelText('Attachment icon')).toBeInTheDocument();
     const fileNameElement = screen.getByText(mockFile.name);
     expect(fileNameElement.tagName.toLowerCase()).toBe('a');
     expect((fileNameElement as HTMLAnchorElement).href).toBe(mockFile.path);
   });
-})
+});

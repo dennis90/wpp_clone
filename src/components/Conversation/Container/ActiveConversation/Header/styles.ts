@@ -9,7 +9,7 @@ export const StyledHeaderContainer = styled.div`
 `;
 
 export const StyledConversationDetails = styled.div`
-  margin: 0 20px
+  margin: 0 20px;
 `;
 
 export const StyledTitle = styled.h2`
@@ -18,5 +18,5 @@ export const StyledTitle = styled.h2`
 `;
 
 export const StyledParticipants = styled.span`
-  font-size: .9rem;
+  font-size: 0.9rem;
 `;

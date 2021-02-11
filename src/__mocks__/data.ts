@@ -1,4 +1,4 @@
-import { Conversation, messageTypeAvailableActions,MessageTypes, User } from 'types/Conversation';
+import { Conversation, messageTypeAvailableActions, MessageTypes, User } from 'types/Conversation';
 import { Citizenship, CivilStatus, FormType, Gender } from 'types/Forms';
 
 type MockedUsers = 'johnDoe' | 'karen' | 'kyc';
@@ -69,7 +69,8 @@ export const conversations: Conversation[] = [
       {
         actions: messageTypeAvailableActions[MessageTypes.GreetingFromSeller],
         read: false,
-        text: 'Olá\n\nMeu nome é Karen, eu sou o robô assitente de cadastro do Intersowa OTC.\n\nVamos dar início ao seu processo de cadastramento?',
+        text:
+          'Olá\n\nMeu nome é Karen, eu sou o robô assitente de cadastro do Intersowa OTC.\n\nVamos dar início ao seu processo de cadastramento?',
         type: MessageTypes.GreetingFromSeller,
         userId: users.karen.id,
         when: new Date('2021-01-30T10:30:00.000Z').toISOString(),
@@ -77,5 +78,5 @@ export const conversations: Conversation[] = [
     ],
     type: 'buyer',
     users: [users.johnDoe, users.karen],
-  }
+  },
 ];

@@ -19,30 +19,22 @@ const ActiveConversation: React.FC<ActiveConversationProps> = (props) => {
   useEffect(() => {
     return () => {
       dispatch(actionPanelActions.setPanelInfo(undefined));
-    }
+    };
   }, [dispatch, props.conversation.id]);
 
   return (
     <StyledConversationContent>
-      <Header
-        image={props.conversation.image}
-        title={props.conversation.title}
-        users={props.conversation.users}
-      />
+      <Header image={props.conversation.image} title={props.conversation.title} users={props.conversation.users} />
 
       <StyledMessagesContainer>
-        {props.conversation.messages.map((message, index) =>
-          <MessageItem
-            conversationUsers={props.conversation.users}
-            key={index}
-            message={message}
-          />,
-        )}
+        {props.conversation.messages.map((message, index) => (
+          <MessageItem conversationUsers={props.conversation.users} key={index} message={message} />
+        ))}
       </StyledMessagesContainer>
 
-      <MessageBar/>
+      <MessageBar />
 
-      <ActionModal/>
+      <ActionModal />
     </StyledConversationContent>
   );
 };

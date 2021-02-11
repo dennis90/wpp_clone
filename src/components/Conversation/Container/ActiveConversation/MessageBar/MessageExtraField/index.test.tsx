@@ -8,8 +8,8 @@ describe('MessageExtraField Component', () => {
     const providedTitle = 'Component title';
     render(
       <AppProviders>
-        <MessageExtraField title={providedTitle} onCancel={jest.fn()}/>
-      </AppProviders>
+        <MessageExtraField title={providedTitle} onCancel={jest.fn()} />
+      </AppProviders>,
     );
     expect(screen.getByText(providedTitle)).toBeInTheDocument();
   });
@@ -18,8 +18,8 @@ describe('MessageExtraField Component', () => {
     const cancelFn = jest.fn();
     render(
       <AppProviders>
-        <MessageExtraField title="title" onCancel={cancelFn}/>
-      </AppProviders>
+        <MessageExtraField title="title" onCancel={cancelFn} />
+      </AppProviders>,
     );
     const closeButton = screen.getByLabelText('close button');
     expect(closeButton).toBeInTheDocument();
@@ -34,7 +34,7 @@ describe('MessageExtraField Component', () => {
         <MessageExtraField title="" onCancel={jest.fn()}>
           Provided children
         </MessageExtraField>
-      </AppProviders>
+      </AppProviders>,
     );
 
     expect(screen.getByText('Provided children')).toBeInTheDocument();

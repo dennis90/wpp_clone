@@ -1,4 +1,4 @@
-import Badge from '@material-ui/core/Badge'
+import Badge from '@material-ui/core/Badge';
 import { Theme } from '@material-ui/core/styles';
 import React from 'react';
 import styled from 'styled-components';
@@ -8,12 +8,8 @@ export interface StyledContainerProps extends React.HTMLAttributes<HTMLDivElemen
 }
 
 export const StyledContainer = styled.div<StyledContainerProps>`
-  background-color: ${
-    ({ active, theme }: { theme: Theme } & StyledContainerProps) =>
-      active
-        ? theme.palette.grey[200]
-        : theme.palette.background.paper
-  };
+  background-color: ${({ active, theme }: { theme: Theme } & StyledContainerProps) =>
+    active ? theme.palette.grey[200] : theme.palette.background.paper};
   border-color: ${({ theme }: { theme: Theme }) => theme.palette.grey[200]};
   border-style: solid;
   border-width: 1px 0;
@@ -47,7 +43,7 @@ export const StyledLastMessage = styled.span`
 `;
 
 export const StyledDateText = styled.span`
-  font-size: .7rem;
+  font-size: 0.7rem;
   margin: auto 0;
 `;
 

@@ -23,7 +23,7 @@ export enum FormType {
 
 export const formTypeGreeting: Record<FormType, string> = {
   [FormType.Registration]: 'Houve um novo cadastro de Pessoa Física\n\nDados do formulário:\n',
-}
+};
 
 export interface BuyerRegistration {
   form: FormType;

@@ -5,8 +5,8 @@ import { render, screen } from 'test-utils';
 import { ActionTypes, Message, MessageTypes, User } from 'types/Conversation';
 import MessageItem from './index';
 
-jest.mock('components/Messages/MediaTypes/Image', () => () => <div data-testid="image-media-type"/>);
-jest.mock('components/Messages/MediaTypes/Unknown', () => () => <div data-testid="unknown-media-type"/>);
+jest.mock('components/Messages/MediaTypes/Image', () => () => <div data-testid="image-media-type" />);
+jest.mock('components/Messages/MediaTypes/Unknown', () => () => <div data-testid="unknown-media-type" />);
 
 describe('Message item component', () => {
   test('display avatar if message was not sent from current user', () => {
@@ -25,15 +25,15 @@ describe('Message item component', () => {
 
     render(
       <AppProviders>
-        <MessageItem message={message} conversationUsers={[user]}/>
-      </AppProviders>
+        <MessageItem message={message} conversationUsers={[user]} />
+      </AppProviders>,
     );
 
     const image = screen.getByAltText(user.name) as HTMLImageElement;
     expect(image.src).toContain(user.profilePicture);
   });
 
-  test('don\'t display avatar if message was sent from current user', () => {
+  test("don't display avatar if message was sent from current user", () => {
     const currentUser: User = {
       id: '100',
       name: 'Active user',
@@ -55,8 +55,8 @@ describe('Message item component', () => {
 
     render(
       <AppProviders>
-        <MessageItem message={message} conversationUsers={[user]}/>
-      </AppProviders>
+        <MessageItem message={message} conversationUsers={[user]} />
+      </AppProviders>,
     );
 
     expect(screen.queryByAltText(currentUser.name)).not.toBeInTheDocument();
@@ -72,8 +72,8 @@ describe('Message item component', () => {
 
     render(
       <AppProviders>
-        <MessageItem message={message} conversationUsers={[]}/>
-      </AppProviders>
+        <MessageItem message={message} conversationUsers={[]} />
+      </AppProviders>,
     );
 
     expect(screen.getByText(ActionTypes.Approve)).toBeInTheDocument();
@@ -91,8 +91,8 @@ describe('Message item component', () => {
 
     render(
       <AppProviders>
-        <MessageItem message={message} conversationUsers={[]}/>
-      </AppProviders>
+        <MessageItem message={message} conversationUsers={[]} />
+      </AppProviders>,
     );
 
     expect(message.text).not.toBeUndefined();
@@ -110,14 +110,14 @@ describe('Message item component', () => {
 
     render(
       <AppProviders>
-        <MessageItem message={message} conversationUsers={[]}/>
-      </AppProviders>
+        <MessageItem message={message} conversationUsers={[]} />
+      </AppProviders>,
     );
 
     expect(screen.getByText(format(new Date(message.when), 'p'))).toBeInTheDocument();
   });
 
-  test('display message date and time if wasn\'t sent today', () => {
+  test("display message date and time if wasn't sent today", () => {
     const message: Message = {
       actions: [],
       type: MessageTypes.Text,
@@ -128,8 +128,8 @@ describe('Message item component', () => {
 
     render(
       <AppProviders>
-        <MessageItem message={message} conversationUsers={[]}/>
-      </AppProviders>
+        <MessageItem message={message} conversationUsers={[]} />
+      </AppProviders>,
     );
 
     expect(screen.getByText(format(new Date(message.when), 'Pp'))).toBeInTheDocument();
@@ -151,8 +151,8 @@ describe('Message item component', () => {
 
     render(
       <AppProviders>
-        <MessageItem message={message} conversationUsers={[]}/>
-      </AppProviders>
+        <MessageItem message={message} conversationUsers={[]} />
+      </AppProviders>,
     );
 
     expect(screen.getByTestId('unknown-media-type')).toBeInTheDocument();
@@ -174,8 +174,8 @@ describe('Message item component', () => {
 
     render(
       <AppProviders>
-        <MessageItem message={message} conversationUsers={[]}/>
-      </AppProviders>
+        <MessageItem message={message} conversationUsers={[]} />
+      </AppProviders>,
     );
 
     expect(screen.getByTestId('image-media-type')).toBeInTheDocument();

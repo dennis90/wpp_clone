@@ -17,11 +17,7 @@ export const officeDocumentTypes = [
   'application/vnd.oasis.opendocument*',
 ];
 
-export const defaultAcceptTypes = [
-  ...officeDocumentTypes,
-  allImagesType,
-  pdfDocumentType,
-];
+export const defaultAcceptTypes = [...officeDocumentTypes, allImagesType, pdfDocumentType];
 
 export interface UploadDocumentProps {
   accept?: string;
@@ -46,12 +42,11 @@ const UploadDocument: React.FC<UploadDocumentProps> = ({ accept = defaultAcceptT
         multiple={false}
         type="file"
         onChange={inputFileChangeHandler}
-
       />
 
       <label htmlFor={props.id}>
         <StyledIconButton aria-label="upload file" size="small">
-          <AttachFileIcon/>
+          <AttachFileIcon />
         </StyledIconButton>
       </label>
     </div>

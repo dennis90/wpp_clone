@@ -11,14 +11,14 @@ const Header: React.FC = (props) => {
 
   const closePanelClickHandler = (): void => {
     dispatch(actions.setPanelInfo(undefined));
-  }
+  };
 
   return (
     <StyledHeader>
       {props.children}
 
       <IconButton aria-label="Close panel" onClick={closePanelClickHandler} size="small">
-        <CloseIcon/>
+        <CloseIcon />
       </IconButton>
     </StyledHeader>
   );

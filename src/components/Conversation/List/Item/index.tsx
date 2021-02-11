@@ -6,7 +6,15 @@ import { useDispatch } from 'react-redux';
 
 import { actions } from 'store/conversations';
 import { Conversation } from 'types/Conversation';
-import { StyledBadge, StyledContainer, StyledDateText, StyledInfoContainer, StyledLastMessage, StyledRow, StyledTitle } from './styles';
+import {
+  StyledBadge,
+  StyledContainer,
+  StyledDateText,
+  StyledInfoContainer,
+  StyledLastMessage,
+  StyledRow,
+  StyledTitle,
+} from './styles';
 
 export interface ConversationProps {
   conversation: Conversation;
@@ -26,17 +34,13 @@ const ConversationItem: React.FC<ConversationProps> = (props) => {
       active={props.active}
       onClick={() => dispatch(actions.selectConversationId(props.conversation.id))}
     >
-      <Avatar alt={props.conversation.title} src={props.conversation.image}/>
+      <Avatar alt={props.conversation.title} src={props.conversation.image} />
 
       <StyledInfoContainer>
         <StyledRow>
-          <StyledTitle>
-            {props.conversation.title}
-          </StyledTitle>
+          <StyledTitle>{props.conversation.title}</StyledTitle>
 
-          <StyledDateText>
-            {format(lastMessageDate, isToday(lastMessageDate) ? 'p' : 'P')}
-          </StyledDateText>
+          <StyledDateText>{format(lastMessageDate, isToday(lastMessageDate) ? 'p' : 'P')}</StyledDateText>
         </StyledRow>
 
         <StyledRow>
@@ -44,7 +48,7 @@ const ConversationItem: React.FC<ConversationProps> = (props) => {
             {lastMessage.text || lastMessage.file?.name || lastMessage.actions.join(', ')}
           </StyledLastMessage>
 
-          <StyledBadge badgeContent={unreadCount} color="primary"/>
+          <StyledBadge badgeContent={unreadCount} color="primary" />
         </StyledRow>
       </StyledInfoContainer>
     </StyledContainer>
