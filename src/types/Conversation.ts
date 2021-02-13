@@ -19,6 +19,7 @@ export enum ActionTypes {
 }
 
 export enum MessageTypes {
+  Audio = 'audio',
   File = 'file',
   GreetingFromBuyer = 'buyer_greeting',
   GreetingFromSeller = 'seller_greeting',
@@ -36,6 +37,7 @@ export const messageTypeAvailableActions: Record<MessageTypes, ActionTypes[]> = 
   ],
   [MessageTypes.File]: [],
   [MessageTypes.Text]: [],
+  [MessageTypes.Audio]: [],
 };
 
 export interface FileInfo {

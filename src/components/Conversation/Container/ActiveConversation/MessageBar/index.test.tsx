@@ -7,6 +7,7 @@ import { render, screen, fireEvent } from 'test-utils';
 import { ActionTypes, Message } from 'types/Conversation';
 
 import MessageBar from './index';
+import { ActionTypeData } from 'store/actionPanel';
 
 global.URL.createObjectURL = jest.fn().mockImplementation((file) => {
   return `http://localhost/${file.name}`;
@@ -24,7 +25,7 @@ jest.mock('react-redux', () => {
 describe('Message bar component', () => {
   describe('Send file message', () => {
     it('send document without message', () => {
-      type DispatchedActionType = { payload: Message } & Action;
+      type DispatchedActionType = { payload: ActionTypeData | undefined } & Action;
       const dispatchList: DispatchedActionType[] = [];
       (useDispatch as jest.Mock).mockImplementation(() => (action: DispatchedActionType) => dispatchList.push(action));
 
@@ -49,6 +50,7 @@ describe('Message bar component', () => {
         actionType: ActionTypes.SendFile,
         documentName: 'filename.png',
         documentPath: 'http://localhost/filename.png',
+        documentType: 'image/png',
         initialMessage: '',
       });
     });
@@ -83,6 +85,7 @@ describe('Message bar component', () => {
         actionType: ActionTypes.SendFile,
         documentName: 'filename.png',
         documentPath: 'http://localhost/filename.png',
+        documentType: 'image/png',
         initialMessage: 'Hello World!',
       });
     });

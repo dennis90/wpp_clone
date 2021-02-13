@@ -46,7 +46,7 @@ const UploadDocument: React.FC<UploadDocumentProps> = ({ accept = defaultAcceptT
 
       <label htmlFor={props.id}>
         <StyledIconButton aria-label="upload file" size="small">
-          <AttachFileIcon />
+          <AttachFileIcon fontSize="large" />
         </StyledIconButton>
       </label>
     </div>

@@ -1,10 +1,15 @@
-import "@testing-library/jest-dom/extend-expect";
+import '@testing-library/jest-dom/extend-expect';
 
 /* eslint-disable */
 
+const streamMock = {
+  getAudioTracks: jest.fn().mockReturnValue([]),
+  getVideoTracks: jest.fn().mockReturnValue([]),
+};
+
 const mediaDevicesMock = {
   enumerateDevices: jest.fn(),
-  getUserMedia: () => new Promise(() => jest.fn()),
+  getUserMedia: () => new Promise((resolve) => resolve(streamMock)),
 };
 
 global.navigator.mediaDevices = mediaDevicesMock;

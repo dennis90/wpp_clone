@@ -8,9 +8,9 @@ import { StoreState } from 'store';
 import { actions as conversationsActions } from 'store/conversations';
 import { actions as actionPanelActions } from 'store/actionPanel';
 import { ActionTypes, Message, MessageTypes } from 'types/Conversation';
+import AudioRecord from './AudioRecord';
 import UploadDocument from './UploadDocument';
-import { StyledMessageBarContainer, StyledTextField, StyledNewMessageContent, StyledIconButton } from './styles';
-import { IconButton } from '@material-ui/core';
+import { StyledIconButton, StyledMessageBarContainer, StyledNewMessageContent, StyledTextField } from './styles';
 
 export type MessageForm = Omit<Message, 'when'>;
 
@@ -64,6 +64,23 @@ const MessageBar: React.FC = () => {
     setMessage(initialMessageValue);
   };
 
+  const audioRecordedHandler = (audio: string): void => {
+    dispatch(
+      conversationsActions.sendMessage({
+        actions: [],
+        type: MessageTypes.Audio,
+        userId: appUser?.id ?? '',
+        when: new Date().toISOString(),
+        text: audio,
+        file: {
+          name: `audio_${new Date().toISOString()}.ogg`,
+          path: audio,
+          type: 'audio/ogg',
+        },
+      }),
+    );
+  };
+
   const inputHelperText = (
     <span
       dangerouslySetInnerHTML={{
@@ -72,21 +89,18 @@ const MessageBar: React.FC = () => {
     />
   );
 
-  const sendMessageButtonEnabled =
-    (message.type === MessageTypes.File && message.file !== undefined) ||
-    (message.type === MessageTypes.Text && message.text !== '');
+  const sendMessageButtonEnabled = message.type === MessageTypes.Text && message.text !== '';
 
   return (
     <StyledMessageBarContainer>
       <StyledNewMessageContent>
         <UploadDocument onChange={fileUploadChangeHandler} id="attach-file-input" />
 
-        <IconButton onClick={takePictureClickHandler}>
-          <CameraAltIcon />
-        </IconButton>
+        <StyledIconButton onClick={takePictureClickHandler} size="small" aria-label="Take picture">
+          <CameraAltIcon fontSize="large" />
+        </StyledIconButton>
 
         <StyledTextField
-          fullWidth={true}
           helperText={inputHelperText}
           multiline={true}
           placeholder="Escreva uma mensagem"
@@ -97,14 +111,14 @@ const MessageBar: React.FC = () => {
           value={message?.text || ''}
           onChange={messageTextChangeHandler}
         />
-        <StyledIconButton
-          size="small"
-          onClick={sendMessageClickHandler}
-          disabled={!sendMessageButtonEnabled}
-          aria-label="Send message"
-        >
-          <SendIcon />
-        </StyledIconButton>
+
+        {sendMessageButtonEnabled ? (
+          <StyledIconButton size="small" onClick={sendMessageClickHandler} aria-label="Send message">
+            <SendIcon />
+          </StyledIconButton>
+        ) : (
+          <AudioRecord onAudioRecorded={audioRecordedHandler} />
+        )}
       </StyledNewMessageContent>
     </StyledMessageBarContainer>
   );

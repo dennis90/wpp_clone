@@ -15,21 +15,18 @@ export const StyledTextField = styled(TextField)`
   flex: 1;
 `;
 
+export const StyledIconButton = styled(IconButton).attrs({ component: 'span' })`
+  height: 42px;
+  width: 42px;
+  margin: 20px 10px;
+`;
+
 export const StyledNewMessageContent = styled.div`
   background: ${({ theme }: { theme: Theme }) => theme.palette.grey[200]};
   min-height: 40px;
   display: flex;
 
-  svg {
-    margin: 20px 10px;
-  }
-
-  svg + svg {
+  ${StyledIconButton} + ${StyledIconButton} {
     margin-left: 0;
   }
-`;
-
-export const StyledIconButton = styled(IconButton).attrs({ component: 'span' })`
-  height: 42px;
-  width: 42px;
 `;

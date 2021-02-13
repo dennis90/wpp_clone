@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { ActionTypes } from 'types/Conversation';
 
-type ActionTypeData =
+export type ActionTypeData =
   | { actionType: ActionTypes.Register }
   | ({ actionType: ActionTypes.SendFile } & {
       documentName: string;

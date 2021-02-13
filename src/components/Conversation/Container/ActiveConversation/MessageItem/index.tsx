@@ -87,6 +87,16 @@ const MessageItem: React.FC<MessageItemProps> = ({ message, conversationUsers: u
               </>
             )}
 
+            {message.type === MessageTypes.Audio && message.file && (
+              // eslint-disable-next-line jsx-a11y/media-has-caption
+              <audio
+                controls={true}
+                id={message.file.name}
+                src={message.file.path}
+                aria-label={`Audio field ${message.file.name}`}
+              />
+            )}
+
             {messageContent && <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(marked(messageContent)) }} />}
 
             <StyledDate>{isToday(messageDate) ? format(messageDate, 'p') : format(messageDate, 'Pp')}</StyledDate>

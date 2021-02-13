@@ -180,4 +180,27 @@ describe('Message item component', () => {
 
     expect(screen.getByTestId('image-media-type')).toBeInTheDocument();
   });
+
+  test('Audio message', () => {
+    const message: Message = {
+      actions: [],
+      type: MessageTypes.Audio,
+      userId: '100',
+      text: '',
+      when: '2021-01-31T12:00:00.000Z',
+      file: {
+        name: 'audio.ogg',
+        type: 'audio/ogg',
+        path: 'http://localhost:3000/audio.ogg',
+      },
+    };
+
+    render(
+      <AppProviders>
+        <MessageItem message={message} conversationUsers={[]} />
+      </AppProviders>,
+    );
+
+    expect(screen.getByLabelText('Audio field audio.ogg')).toBeInTheDocument();
+  });
 });
