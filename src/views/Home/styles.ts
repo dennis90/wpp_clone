@@ -1,7 +1,11 @@
 import styled from 'styled-components';
 
-export const StyledContainer = styled.div`
+export interface StyledContainerProps extends React.HTMLAttributes<HTMLDivElement> {
+  height: number;
+}
+
+export const StyledContainer = styled.div<StyledContainerProps>`
   display: flex;
-  height: 100%;
+  height: ${({ height }: StyledContainerProps) => height}px;
   overflow: hidden;
 `;

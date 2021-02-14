@@ -11,12 +11,14 @@ import { MEDIUM_RULE } from 'styles/media-queries';
 import { StyledContainer } from './styles';
 
 import { conversations, users } from '__mocks__/data';
+import useWindowHeight from 'hooks/useWindowHeight';
 
 const Home: React.FC = () => {
   const dispatch = useDispatch();
   const { selectedConversationId } = useSelector((store: StoreState) => store.conversations);
 
   const greaterThanMd = useMediaQuery(MEDIUM_RULE);
+  const windowHeight = useWindowHeight();
 
   // TODO: This should be replaced by real data
   useEffect(() => {
@@ -28,7 +30,7 @@ const Home: React.FC = () => {
   }, [dispatch]);
 
   return (
-    <StyledContainer>
+    <StyledContainer height={windowHeight}>
       {(greaterThanMd || !selectedConversationId) && <ConversationList />}
 
       {(greaterThanMd || selectedConversationId) && <ConversationContainer />}

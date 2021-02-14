@@ -7,6 +7,8 @@ import { useDispatch } from 'react-redux';
 import { actions } from 'store/conversations';
 import { Conversation } from 'types/Conversation';
 import { StyledConversationDetails, StyledHeaderContainer, StyledParticipants, StyledTitle } from './styles';
+import { MEDIUM_RULE } from 'styles/media-queries';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 export interface HeaderProps {
   image: Conversation['image'];
@@ -16,6 +18,7 @@ export interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = (props) => {
   const dispatch = useDispatch();
+  const greaterThanMD = useMediaQuery(MEDIUM_RULE);
 
   const backButtonClickHandler = (): void => {
     dispatch(actions.selectConversationId(undefined));
@@ -23,9 +26,11 @@ const Header: React.FC<HeaderProps> = (props) => {
 
   return (
     <StyledHeaderContainer>
-      <IconButton color="inherit" onClick={backButtonClickHandler}>
-        <ArrowBackIosIcon />
-      </IconButton>
+      {!greaterThanMD && (
+        <IconButton size="small" color="inherit" onClick={backButtonClickHandler}>
+          <ArrowBackIosIcon />
+        </IconButton>
+      )}
 
       <Avatar src={props.image} alt={props.title} />
 
