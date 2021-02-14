@@ -9,8 +9,6 @@ import ActionModalHeader from 'components/Conversation/ActionModal/Header';
 import { actions as actionPanelActions } from 'store/actionPanel';
 import { ActionTypes } from 'types/Conversation';
 import {
-  PHOTO_HEIGHT,
-  PHOTO_WIDTH,
   StyledActionsContainer,
   StyledContainer,
   StyledContent,
@@ -52,8 +50,8 @@ const SendPhoto: React.FC = () => {
   const takePhotoClickHandler = (): void => {
     if (videoElementRef.current) {
       const canvas = document.createElement('canvas');
-      canvas.width = PHOTO_WIDTH;
-      canvas.height = PHOTO_HEIGHT;
+      canvas.width = videoElementRef.current.clientWidth;
+      canvas.height = videoElementRef.current.clientHeight;
       const ctx = canvas.getContext('2d');
       ctx?.drawImage(videoElementRef.current, 0, 0, canvas.width, canvas.height);
 
