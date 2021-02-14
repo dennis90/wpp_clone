@@ -11,8 +11,10 @@ export const StyledMessageModal = styled.div<StyledMessageModalProps>`
   border-top-right-radius: 6px;
   bottom: 0;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
   height: ${({ open }: StyledMessageModalProps) => (open ? 'calc(100% - 60px)' : '0px')};
-  overflow: none;
+  overflow: hidden;
   position: absolute;
   transition: height 0.4s ease-in-out;
   width: 100%;

@@ -24,7 +24,7 @@ describe('SendPhoto component', () => {
       </AppMockProviders>,
     );
 
-    const takePictureButton = screen.getByText('Tirar foto') as HTMLButtonElement;
+    const takePictureButton = screen.getByLabelText('Take photo') as HTMLButtonElement;
     fireEvent.click(takePictureButton);
     expect(screen.getByAltText('Camera capture')).toBeInTheDocument();
   });
@@ -36,10 +36,10 @@ describe('SendPhoto component', () => {
       </AppMockProviders>,
     );
 
-    const takePictureButton = screen.getByText('Tirar foto') as HTMLButtonElement;
+    const takePictureButton = screen.getByLabelText('Take photo') as HTMLButtonElement;
     fireEvent.click(takePictureButton);
 
-    const retakePictureButton = screen.getByText('Tirar outra foto') as HTMLButtonElement;
+    const retakePictureButton = screen.getByLabelText('Take another photo') as HTMLButtonElement;
     fireEvent.click(retakePictureButton);
 
     expect(screen.getByLabelText('Camera input')).toBeInTheDocument();
@@ -58,11 +58,11 @@ describe('SendPhoto component', () => {
       </AppMockProviders>,
     );
 
-    const takePictureButton = screen.getByText('Tirar foto') as HTMLButtonElement;
+    const takePictureButton = screen.getByLabelText('Take photo') as HTMLButtonElement;
     fireEvent.click(takePictureButton);
     expect(screen.getByAltText('Camera capture')).toBeInTheDocument();
 
-    const sendMessageButton = screen.getByText('Enviar foto');
+    const sendMessageButton = screen.getByLabelText('Send photo');
     fireEvent.click(sendMessageButton);
 
     expect(dispatchList).toHaveLength(1);

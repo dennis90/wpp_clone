@@ -1,13 +1,24 @@
-import Button from '@material-ui/core/Button';
+import FlipCameraIosIcon from '@material-ui/icons/FlipCameraIos';
+import IconButton from '@material-ui/core/IconButton';
+import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
+import SendIcon from '@material-ui/icons/Send';
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import ActionModalHeader from 'components/Conversation/ActionModal/Header';
 import { actions as actionPanelActions } from 'store/actionPanel';
 import { ActionTypes } from 'types/Conversation';
-
-const PHOTO_WIDTH = 640;
-const PHOTO_HEIGHT = 480;
+import {
+  PHOTO_HEIGHT,
+  PHOTO_WIDTH,
+  StyledActionsContainer,
+  StyledContainer,
+  StyledContent,
+  StyledDivider,
+  StyledFooter,
+  StyledPhoto,
+  StyledVideo,
+} from './styles';
 
 const PHOTO_MIME = 'image/png';
 
@@ -79,43 +90,45 @@ const SendPhoto: React.FC = () => {
   }, []);
 
   return (
-    <div>
+    <StyledContainer>
       <ActionModalHeader>Tire uma foto</ActionModalHeader>
 
-      <div>
+      <StyledContent>
         {!photo && (
-          <video
+          <StyledVideo
             aria-label="Camera input"
             autoPlay={true}
-            height={PHOTO_HEIGHT}
             muted={true}
             playsInline={true}
             ref={videoElementRef}
-            width={PHOTO_WIDTH}
           />
         )}
 
-        {photo && <img src={photo} alt="Camera capture" />}
-      </div>
+        {photo && <StyledPhoto src={photo} alt="Camera capture" />}
+      </StyledContent>
 
-      {!photo && (
-        <Button color="primary" onClick={takePhotoClickHandler}>
-          Tirar foto
-        </Button>
-      )}
+      <StyledFooter>
+        <StyledDivider />
+        <StyledActionsContainer>
+          {photo && (
+            <>
+              <IconButton color="secondary" onClick={takePhotoAgainClickHandler} aria-label="Take another photo">
+                <FlipCameraIosIcon fontSize="large" />
+              </IconButton>
 
-      {photo && (
-        <>
-          <Button color="primary" onClick={sendPhotoClickHandler}>
-            Enviar foto
-          </Button>
-
-          <Button color="secondary" onClick={takePhotoAgainClickHandler}>
-            Tirar outra foto
-          </Button>
-        </>
-      )}
-    </div>
+              <IconButton color="primary" onClick={sendPhotoClickHandler} aria-label="Send photo">
+                <SendIcon fontSize="large" />
+              </IconButton>
+            </>
+          )}
+          {!photo && (
+            <IconButton color="primary" onClick={takePhotoClickHandler} aria-label="Take photo">
+              <PhotoCameraIcon fontSize="large" />
+            </IconButton>
+          )}
+        </StyledActionsContainer>
+      </StyledFooter>
+    </StyledContainer>
   );
 };
 

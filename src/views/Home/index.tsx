@@ -1,16 +1,22 @@
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import ConversationContainer from 'components/Conversation/Container';
 import ConversationList from 'components/Conversation/List';
+import { StoreState } from 'store';
 import { actions as conversationActions } from 'store/conversations';
 import { actions as sessionActions } from 'store/session';
+import { MEDIUM_RULE } from 'styles/media-queries';
 import { StyledContainer } from './styles';
 
 import { conversations, users } from '__mocks__/data';
 
 const Home: React.FC = () => {
   const dispatch = useDispatch();
+  const { selectedConversationId } = useSelector((store: StoreState) => store.conversations);
+
+  const greaterThanMd = useMediaQuery(MEDIUM_RULE);
 
   // TODO: This should be replaced by real data
   useEffect(() => {
@@ -23,8 +29,9 @@ const Home: React.FC = () => {
 
   return (
     <StyledContainer>
-      <ConversationList />
-      <ConversationContainer />
+      {(greaterThanMd || !selectedConversationId) && <ConversationList />}
+
+      {(greaterThanMd || selectedConversationId) && <ConversationContainer />}
     </StyledContainer>
   );
 };
