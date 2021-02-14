@@ -1,5 +1,6 @@
 import { Theme } from '@material-ui/core/styles';
 import styled from 'styled-components';
+import { LARGE_RULE } from 'styles/media-queries';
 
 export interface StyledReceivedMessageProps extends React.HTMLAttributes<HTMLDivElement> {
   kind: 'received' | 'sent';
@@ -26,7 +27,11 @@ export const StyledMessageContent = styled.div<StyledMessageContentProps>`
   display: flex;
   margin: ${({ kind }: StyledMessageContentProps) => (kind === 'received' ? '20px' : '20px 20px 20px auto')};
   justify-content: ${({ kind }: StyledMessageContentProps) => (kind === 'received' ? 'flex-start' : 'flex-end')};
-  width: 60%;
+  width: auto;
+
+  @media ${LARGE_RULE} {
+    max-width: 60%;
+  }
 `;
 
 export const StyledDate = styled.p`
