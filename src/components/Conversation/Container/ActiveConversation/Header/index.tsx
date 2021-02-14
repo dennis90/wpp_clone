@@ -27,7 +27,7 @@ const Header: React.FC<HeaderProps> = (props) => {
   return (
     <StyledHeaderContainer>
       {!greaterThanMD && (
-        <IconButton size="small" color="inherit" onClick={backButtonClickHandler}>
+        <IconButton aria-label="Back to listing" size="small" color="inherit" onClick={backButtonClickHandler}>
           <ArrowBackIosIcon />
         </IconButton>
       )}
