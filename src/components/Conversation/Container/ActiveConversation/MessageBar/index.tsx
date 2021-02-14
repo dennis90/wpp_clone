@@ -71,7 +71,7 @@ const MessageBar: React.FC = () => {
         type: MessageTypes.Audio,
         userId: appUser?.id ?? '',
         when: new Date().toISOString(),
-        text: audio,
+        text: '',
         file: {
           name: `audio_${new Date().toISOString()}.ogg`,
           path: audio,
