@@ -4,6 +4,7 @@ import React from 'react';
 import { StyledIconButton } from '../styles';
 
 export const allImagesType = 'image/*';
+export const allAudiosType = 'audio/*';
 export const pdfDocumentType = 'application/pdf';
 export const officeDocumentTypes = [
   'application/msword',
@@ -17,7 +18,7 @@ export const officeDocumentTypes = [
   'application/vnd.oasis.opendocument*',
 ];
 
-export const defaultAcceptTypes = [...officeDocumentTypes, allImagesType, pdfDocumentType];
+export const defaultAcceptTypes = [...officeDocumentTypes, allImagesType, pdfDocumentType, allAudiosType];
 
 export interface UploadDocumentProps {
   accept?: string;
@@ -27,8 +28,8 @@ export interface UploadDocumentProps {
 
 const UploadDocument: React.FC<UploadDocumentProps> = ({ accept = defaultAcceptTypes.join(', '), ...props }) => {
   const inputFileChangeHandler = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    if (event.target.files && props.onChange) {
-      props.onChange(event.target.files[0]);
+    if (event.currentTarget.files && props.onChange) {
+      props.onChange(event.currentTarget.files[0]);
     }
   };
 

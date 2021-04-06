@@ -16,6 +16,7 @@ import { sendMessage } from 'services/queries';
 import SendFile from './ActionModal/forms/SendFile';
 import SendPhoto, { PHOTO_MIME } from './ActionModal/forms/SendPhoto';
 import usePrevious from 'hooks/usePrevious';
+import { dataURItoBlob } from 'helpers/image';
 
 export type MessageForm = Omit<Message, 'when' | 'userId'>;
 
@@ -39,6 +40,7 @@ const MessageBar: React.FC = () => {
   const [message, setMessage] = useState<MessageForm>(initialMessageValue);
   const [loading, setLoading] = useState<boolean>(false);
   const [modal, setModal] = useState<ActionModalEnum | undefined>(undefined);
+  const [file, setFile] = useState<File | null>(null);
 
   const prevModalValue = usePrevious(modal);
 
@@ -53,6 +55,8 @@ const MessageBar: React.FC = () => {
 
   const fileUploadChangeHandler = (file: File): void => {
     const fileURL = window.URL.createObjectURL(file);
+
+    setFile(file);
 
     setMessage((msg) => ({
       ...msg,
@@ -87,10 +91,10 @@ const MessageBar: React.FC = () => {
       if (!message.file) {
         throw Error('File not found');
       }
-
+      const blobFile = file ? file : dataURItoBlob(message.file.path);
       const fileRef = storage.ref().child(`images/${pid}/${message.file.name}`);
-      await fileRef.putString(message.file.path);
-      const fileURL = fileRef.fullPath;
+      await fileRef.put(blobFile);
+      const fileURL = await fileRef.getDownloadURL();
 
       await sendMessage(pid as string, {
         ...message,
@@ -102,6 +106,7 @@ const MessageBar: React.FC = () => {
         },
       });
 
+      setFile(null);
       setMessage(initialMessageValue);
     } finally {
       setModal(undefined);
@@ -110,6 +115,7 @@ const MessageBar: React.FC = () => {
   };
 
   const modalCanceledHandler = (): void => {
+    setFile(null);
     setModal(undefined);
   };
 
@@ -143,7 +149,7 @@ const MessageBar: React.FC = () => {
         userId: currentUser?.uid ?? '',
         text: '',
         file: {
-          name: `audio_${new Date().toISOString()}.ogg`,
+          name: `audio_${new Date().valueOf()}.ogg`,
           path: audioURL,
           type: audio.type,
         },
@@ -170,15 +176,13 @@ const MessageBar: React.FC = () => {
           {loading ? (
             <CircularProgress />
           ) : (
-            <UploadDocument onChange={fileUploadChangeHandler} id="attach-file-input" />
-          )}
+            <>
+              <UploadDocument onChange={fileUploadChangeHandler} id="attach-file-input" />
 
-          {loading ? (
-            <CircularProgress />
-          ) : (
-            <StyledIconButton onClick={takePictureClickHandler} size="small" aria-label="Take picture">
-              <CameraAltIcon fontSize="large" />
-            </StyledIconButton>
+              <StyledIconButton onClick={takePictureClickHandler} size="small" aria-label="Take picture">
+                <CameraAltIcon fontSize="large" />
+              </StyledIconButton>
+            </>
           )}
 
           <StyledTextField
