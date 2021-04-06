@@ -1,4 +1,4 @@
-# WPP Close
+# WPP Clone
 A simple WIP whats app clone built with react js / nextjs / firebase
 
 
