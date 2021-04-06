@@ -1,4 +1,6 @@
 import { BuyerRegistration } from './Forms';
+
+import firebase from 'firebase/app';
 export interface User {
   id: string;
   name: string;
@@ -54,14 +56,20 @@ export interface Message {
   text?: string;
   type: MessageTypes;
   userId: string;
-  when: string;
+  when?: firebase.firestore.Timestamp;
 }
 
 export interface Conversation {
-  id: string;
   image: string;
-  messages: Message[];
+  messages?: Message[];
   title: string;
-  type: 'buyer' | 'seller';
-  users: User[];
+  users: Profile[];
+  id: string;
+}
+
+export interface Profile {
+  uid: string;
+  name?: string;
+  email?: string;
+  photo?: string;
 }

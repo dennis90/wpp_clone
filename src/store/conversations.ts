@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { Conversation, Message } from 'types/Conversation';
+import { Conversation } from 'types/Conversation';
 
 export interface ConversationsSlice {
   conversations: Conversation[];
-  selectedConversationId?: Conversation['id'];
+  selectedConversationId?: string;
 }
 
 const initialState: ConversationsSlice = {
@@ -20,12 +20,12 @@ export const conversationsSlice = createSlice({
       state.selectedConversationId = action.payload;
     },
 
-    sendMessage: (state, action: PayloadAction<Message>) => {
-      const currentConversation = state.conversations.find(({ id }) => id === state.selectedConversationId);
-      if (currentConversation) {
-        currentConversation.messages = [action.payload, ...currentConversation.messages];
-      }
-    },
+    // sendMessage: (state, action: PayloadAction<Message>) => {
+    //   const currentConversation = state.conversations.find(({ id }) => id === state.selectedConversationId);
+    //   if (currentConversation) {
+    //     currentConversation.messages = [action.payload, ...currentConversation.messages];
+    //   }
+    // },
 
     appendConversation: (state, action: PayloadAction<Conversation>) => {
       state.conversations = [action.payload, ...state.conversations];

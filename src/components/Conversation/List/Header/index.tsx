@@ -1,17 +1,17 @@
 import Avatar from '@material-ui/core/Avatar';
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
-import { StoreState } from 'store';
 import { StyledUserHeader, StyledUserName } from './styles';
+import { auth } from 'config/firebase';
 
 const ListHeader: React.FC = () => {
-  const appUser = useSelector((store: StoreState) => store.session.user);
+  const [user] = useAuthState(auth);
 
   return (
     <StyledUserHeader>
-      <Avatar src={appUser?.profilePicture} alt={appUser?.name} />
-      <StyledUserName>{appUser?.name}</StyledUserName>
+      <Avatar src={user?.photoURL || ''} alt={user?.email || 'Profile picture'} />
+      <StyledUserName>{user?.displayName || user?.email}</StyledUserName>
     </StyledUserHeader>
   );
 };

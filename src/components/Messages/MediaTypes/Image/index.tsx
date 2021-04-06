@@ -3,12 +3,12 @@ import React from 'react';
 import { FileInfo } from 'types/Conversation';
 import { StyledMediaContent, StyledIconContainer, StyledImage } from './styles';
 
-export interface UnknownMediaProps {
+export interface ImageMediaProps {
   downloadable?: boolean;
   file: FileInfo;
 }
 
-const UnknownMedia: React.FC<UnknownMediaProps> = ({ downloadable = false, file }) => {
+const ImageMedia: React.FC<ImageMediaProps> = ({ downloadable = false, file }) => {
   return (
     <StyledMediaContent>
       <StyledIconContainer>
@@ -26,4 +26,4 @@ const UnknownMedia: React.FC<UnknownMediaProps> = ({ downloadable = false, file 
   );
 };
 
-export default UnknownMedia;
+export default ImageMedia;

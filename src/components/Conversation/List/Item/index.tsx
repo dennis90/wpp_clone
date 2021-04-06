@@ -1,10 +1,9 @@
 import Avatar from '@material-ui/core/Avatar';
 import format from 'date-fns/format';
 import isToday from 'date-fns/isToday';
+import { useRouter } from 'next/router';
 import React from 'react';
-import { useDispatch } from 'react-redux';
 
-import { actions } from 'store/conversations';
 import { Conversation } from 'types/Conversation';
 import {
   StyledBadge,
@@ -18,34 +17,34 @@ import {
 
 export interface ConversationProps {
   conversation: Conversation;
+  id: string;
   active?: boolean;
 }
 
 const ConversationItem: React.FC<ConversationProps> = (props) => {
-  const dispatch = useDispatch();
+  const router = useRouter();
 
-  const unreadCount = props.conversation.messages.filter((message) => !message.read).length;
-  const lastMessage = props.conversation.messages[0];
+  const unreadCount = (props.conversation.messages || []).filter((message) => !message.read).length;
+  const lastMessage = (props.conversation.messages || []).length > 0 ? props.conversation.messages[0] : null;
 
-  const lastMessageDate = new Date(props.conversation.messages[0].when);
+  const lastMessageDate = lastMessage ? lastMessage.when.toDate() : null;
 
   return (
-    <StyledContainer
-      active={props.active}
-      onClick={() => dispatch(actions.selectConversationId(props.conversation.id))}
-    >
+    <StyledContainer active={props.active} onClick={() => router.push(`/message/${props.id}`)}>
       <Avatar alt={props.conversation.title} src={props.conversation.image} />
 
       <StyledInfoContainer>
         <StyledRow>
           <StyledTitle>{props.conversation.title}</StyledTitle>
 
-          <StyledDateText>{format(lastMessageDate, isToday(lastMessageDate) ? 'p' : 'P')}</StyledDateText>
+          <StyledDateText>
+            {lastMessageDate ? format(lastMessageDate, isToday(lastMessageDate) ? 'p' : 'P') : ' - '}
+          </StyledDateText>
         </StyledRow>
 
         <StyledRow>
           <StyledLastMessage>
-            {lastMessage.text || lastMessage.file?.name || lastMessage.actions.join(', ')}
+            {lastMessage ? lastMessage.text || lastMessage.file?.name || lastMessage.actions.join(', ') : ' - '}
           </StyledLastMessage>
 
           <StyledBadge badgeContent={unreadCount} color="primary" />

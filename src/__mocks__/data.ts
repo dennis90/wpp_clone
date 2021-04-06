@@ -1,25 +1,25 @@
-import { Conversation, messageTypeAvailableActions, MessageTypes, User } from 'types/Conversation';
+import { Conversation, messageTypeAvailableActions, MessageTypes, Profile } from 'types/Conversation';
 import { Citizenship, CivilStatus, FormType, Gender } from 'types/Forms';
 
 type MockedUsers = 'johnDoe' | 'karen' | 'kyc';
 
-export const users: Record<MockedUsers, User> = {
+export const users: Record<MockedUsers, Profile> = {
   johnDoe: {
-    id: '100',
+    uid: '100',
     name: 'John Doe',
-    profilePicture: 'media/ball.jpg',
+    photo: 'media/ball.jpg',
   },
 
   karen: {
-    id: '200',
+    uid: '200',
     name: 'Karen',
-    profilePicture: 'media/beach.jpg',
+    photo: 'media/beach.jpg',
   },
 
   kyc: {
-    id: '300',
+    uid: '300',
     name: 'KYC',
-    profilePicture: 'media/butterfly.jpg',
+    photo: 'media/butterfly.jpg',
   },
 };
 
@@ -33,8 +33,7 @@ export const conversations: Conversation[] = [
         actions: messageTypeAvailableActions[MessageTypes.ValidateDocuments],
         read: false,
         type: MessageTypes.ValidateDocuments,
-        userId: users.kyc.id,
-        when: new Date('2021-01-31T12:35:00.000Z').toISOString(),
+        userId: users.kyc.uid,
       },
       {
         actions: messageTypeAvailableActions[MessageTypes.GreetingFromBuyer],
@@ -54,29 +53,24 @@ export const conversations: Conversation[] = [
           civil_status: CivilStatus.Single,
         },
         type: MessageTypes.Text,
-        userId: users.karen.id,
-        when: new Date('2021-01-31T12:30:00.000Z').toISOString(),
+        userId: users.karen.uid,
       },
     ],
-    type: 'seller',
     users: [users.johnDoe, users.karen, users.kyc],
   },
   {
     id: '200',
-    title: 'Comprar de Intersowa',
+    title: 'Buy from company',
     image: 'media/airplane.jpg',
     messages: [
       {
         actions: messageTypeAvailableActions[MessageTypes.GreetingFromSeller],
         read: false,
-        text:
-          'Olá\n\nMeu nome é Karen, eu sou o robô assitente de cadastro do Intersowa OTC.\n\nVamos dar início ao seu processo de cadastramento?',
+        text: 'Greeting message',
         type: MessageTypes.GreetingFromSeller,
-        userId: users.karen.id,
-        when: new Date('2021-01-30T10:30:00.000Z').toISOString(),
+        userId: users.karen.uid,
       },
     ],
-    type: 'buyer',
     users: [users.johnDoe, users.karen],
   },
 ];

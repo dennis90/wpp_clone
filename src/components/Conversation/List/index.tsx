@@ -1,24 +1,25 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { useCollectionData } from 'react-firebase-hooks/firestore';
 
-import { StoreState } from 'store';
 import Header from './Header';
 import ConversationItem from './Item';
 import { StyledContainer } from './styles';
+import { auth, firestore } from 'config/firebase';
+import { Conversation } from 'types/Conversation';
 
 const ConversationList: React.FC = () => {
-  const { conversations, selectedConversationId } = useSelector((store: StoreState) => store.conversations);
+  const [user] = useAuthState(auth);
+  const [value] = useCollectionData<Conversation>(firestore.collection(`user/conversations/${user?.uid}`));
 
   return (
     <StyledContainer>
       <Header />
 
-      {conversations.map((conversation) => (
-        <ConversationItem
-          key={conversation.id}
-          active={conversation.id === selectedConversationId}
-          conversation={conversation}
-        />
+      {(value === undefined || value?.length === 0) && <div>Usuário ainda não possui conversas :(</div>}
+
+      {value?.map((conversation) => (
+        <ConversationItem key={conversation.id} id={conversation.id} active={false} conversation={conversation} />
       ))}
     </StyledContainer>
   );
