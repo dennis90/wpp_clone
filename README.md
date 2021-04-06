@@ -1,7 +1,8 @@
-# WPP Marketplace
-A marketplace application based on WhatsApp® for cryptocurrencies negotiations
+# WPP Close
+A simple WIP whats app clone built with react js / nextjs / firebase
 
-![CI Status](https://github.com/dennis90/wpp_marketplace/workflows/CI/badge.svg)
+
+![CI Status](https://github.com/dennis90/wpp_clone/workflows/CI/badge.svg)
 
 ## Dependencies
 
